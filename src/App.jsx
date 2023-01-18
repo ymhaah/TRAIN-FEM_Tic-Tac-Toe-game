@@ -1,6 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { gsap } from "gsap";
+import './index.css'
+
+
+console.log(`Made with Love by Youssef Hafnawi`);
 
 function App() {
   const [count, setCount] = useState(0)
