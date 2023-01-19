@@ -1,54 +1,52 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&display=swap");
 :root {
-  --clr-red-400: hsl(345, 88%, 66%);
-  --clr-red-700: hsl(0, 94%, 66%);
-  --clr-red-800: hsl(344, 100%, 54%);
-  --clr-blue-300: hsl(209, 91%, 65%);
-  --clr-blue-400: hsl(209, 98%, 56%);
-  --clr-blue-500: hsl(216, 98%, 52%);
-  --clr-pink: hsl(330, 67%, 52%);
-  --clr-purple: hsl(261, 51%, 51%);
-  --clr-green: hsl(152, 69%, 31%);
-  --clr-yellow: hsl(45, 100%, 51%);
-  --clr-orange: hsl(27, 98%, 54%);
-  --clr-gray-600: hsl(210, 11%, 15%);
-  --clr-gray-300: hsl(210, 11%, 71%);
-  --clr-black: hsl(0, 0%, 0%);
-  --clr-white: hsl(0, 0%, 100%);
-  --clr-alpha-gray-700: 230 35% 7%;
-  --clr-alpha-gray-200: 31 77% 90%;
+  --clr-teal-blue-500: hsl(178, 75%, 65%);
+  --clr-teal-blue-700: hsl(178, 60%, 48%);
+  --clr-gold-orange-600: hsl(39, 100%, 69%);
+  --clr-gold-orange-800: hsl(39, 88%, 58%);
+  --clr-dark-teal-600: hsl(200, 35%, 20%);
+  --clr-dark-teal-700: hsl(199, 30%, 15%);
+  --clr-dark-teal-800: hsl(
+      198,
+      45%,
+      10%
+  );
+  --clr-ice-blue-200: hsl(
+      200,
+      25%,
+      75%
+  );
+  --clr-blue-gray-300: hsl(200, 20%, 50%);
+  --clr-alpha-black: 0 0% 0%;
   --clr-alpha-white: 0 0% 100%;
-  --my-brand-accent-clr: var(--clr-red-800);
-  --bg-clr-light: var(--clr-white);
-  --txt-clr-light: var(--clr-black);
-  --accent-clr-light: var(--clr-blue-400);
-  --secondary-clr-light: var(--clr-gray-300);
-  --bg-clr-dark: var(--clr-gray-600);
-  --txt-clr-dark: var(--clr-white);
-  --accent-clr-dark: var(--clr-blue-500);
-  --secondary-clr-dark: var(--clr-gray-300);
-  --bg-clr: var(--bg-clr-light);
-  --txt-clr: var(--txt-clr-light);
-  --accent-clr: var(--accent-clr-light);
-  --secondary-clr: var(--secondary-clr-light);
-  color-scheme: light;
+  --clr-alpha-ice-blue-200: 200 25% 75%;
+  --clr-alpha-dark-teal-800: 198 45% 10%;
+  --bg-clr: var(--clr-dark-teal-700);
+  --bg-item-clr: var(--clr-dark-teal-600);
+  --txt-clr: var(--clr-ice-blue-200);
+  --accent-text-clr: var(--clr-dark-teal-800);
+  --accent-X-clr: var(--clr-teal-blue-700);
+  --accent-O-clr: var(--clr-gold-orange-800);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-clr: var(--bg-clr-dark);
-    --txt-clr: var(--txt-clr-dark);
-    --accent-clr: var(--accent-clr-dark);
-    --secondary-clr: var(--secondary-clr-dark);
-    color-scheme: dark;
-  }
-}
-[aria-labelledby="hero title"] .Container .Hero {
+[aria-labelledby="hero title"] .Container .Hero, .main-header .header__Container, .main-header .header__Container .header__Logo, .main-header .header__Container .header__main-navigation, .main-header .header__Container .header__main-navigation ul {
   display: flex;
 }
 
-[aria-labelledby="hero title"] .Container .Hero {
+[aria-labelledby="hero title"] .Container .Hero, .main-header .header__Container, .main-header .header__Container .header__main-navigation, .main-header .header__Container .header__main-navigation ul {
   flex-direction: row;
+}
+
+.main-header .header__Container .header__Logo {
+  justify-content: center;
+}
+
+.main-header .header__Container, .main-header .header__Container .header__main-navigation ul {
+  justify-content: space-between;
+}
+
+.main-header .header__Container, .main-header .header__Container .header__Logo, .main-header .header__Container .header__main-navigation, .main-header .header__Container .header__main-navigation ul {
+  align-items: center;
 }
 
 :root {
@@ -389,38 +387,6 @@ picture {
   border: 0 !important;
 }
 
-.colors {
-  width: 100vw;
-}
-.colors .red {
-  width: 100%;
-  height: 20vh;
-  display: flex;
-  align-items: r;
-  -webkit-align-items: r;
-  justify-content: c;
-  -webkit-justify-content: c;
-  flex-direction: c;
-  flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
-  gap: 1rem;
-  padding: 1rem;
-}
-.colors .red div {
-  width: 33.3333333333%;
-  height: 100%;
-  border-radius: 16px;
-}
-.colors .red :nth-child(1) {
-  background-color: var(--clr-red-800);
-}
-.colors .red :nth-child(2) {
-  background-color: var(--clr-red-700);
-}
-.colors .red :nth-child(3) {
-  background-color: var(--clr-red-400);
-}
-
 :root {
   --Header-hight: 5rem;
   --Header-Nav-width: 30em;
@@ -437,26 +403,8 @@ picture {
 .main-header .Container {
   --container-width: 60%;
 }
-.main-header .header__Container {
-  display: flex;
-  align-items: r;
-  -webkit-align-items: r;
-  justify-content: sb;
-  -webkit-justify-content: sb;
-  flex-direction: c;
-  flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
-}
 .main-header .header__Container .header__Logo {
   width: 100%;
-  display: flex;
-  align-items: n;
-  -webkit-align-items: n;
-  justify-content: c;
-  -webkit-justify-content: c;
-  flex-direction: c;
-  flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
 }
 .main-header .header__Container .header__Logo a {
   cursor: pointer;
@@ -489,25 +437,9 @@ picture {
 .main-header .header__Container .header__main-navigation {
   font-size: var(--fs-s);
   width: var(--Header-Nav-width);
-  display: flex;
-  align-items: r;
-  -webkit-align-items: r;
-  justify-content: n;
-  -webkit-justify-content: n;
-  flex-direction: c;
-  flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
 }
 .main-header .header__Container .header__main-navigation ul {
   width: 100%;
-  display: flex;
-  align-items: r;
-  -webkit-align-items: r;
-  justify-content: sb;
-  -webkit-justify-content: sb;
-  flex-direction: c;
-  flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
 }
 .main-header .header__Container .header__main-navigation ul li a {
   font-size: var(--fs-s);
