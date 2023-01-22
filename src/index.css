@@ -264,12 +264,10 @@ ul a {
 }
 
 img {
-  max-width: 100%;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  display: block;
 }
 
 [type=button] {
@@ -320,6 +318,15 @@ img {
   margin: 0 1rem 0 0;
 }
 
+.Button:has(img) {
+  padding: max(0.4em, 0.4rem) max(0.5em, 0.5rem);
+}
+
+.Button img {
+  width: var(--fs-100);
+  height: var(--fs-100);
+}
+
 .visually-hidden {
   position: absolute;
   position: absolute !important;
@@ -341,6 +348,11 @@ img {
 .accent-O-clr {
   --accent-clr: var(--accent-O-clr);
   --accent-shadow-clr: var(--clr-gold-orange-600);
+}
+
+.accent-S-clr {
+  --accent-clr: var(--txt-clr);
+  --accent-shadow-clr: var(--clr-blue-gray-300);
 }
 
 :root {
