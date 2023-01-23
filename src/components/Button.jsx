@@ -26,14 +26,14 @@ function Button(prop) {
             </>
         );
     } else if (prop.pageState == 3) {
-        if (restart) {
+        if (prop.restart) {
             content =
                 prop.accent == "x-accent"
                     ? ""
                     : prop.accent == "o-accent"
                     ? "yes, restart"
                     : prop.accent == "s-accent" && "no, cancel";
-        } else if (result) {
+        } else if (!prop.restart) {
             content =
                 prop.accent == "x-accent"
                     ? ""
