@@ -1,21 +1,16 @@
 import React from "react";
+import accentFun from "../../utils/accentFun";
 
 function Button(prop) {
-    let accent =
-        prop.accent == "x-accent"
-            ? "accent-X-clr"
-            : prop.accent == "o-accent"
-            ? "accent-O-clr"
-            : prop.accent == "s-accent" && "accent-S-clr";
     let content = "";
     if (prop.pageState == 1) {
         content =
-            prop.accent == "x-accent"
+            prop.accent == "x"
                 ? "new game (vs cpu)"
-                : prop.accent == "o-accent"
+                : prop.accent == "o"
                 ? "new game (vs player)"
-                : prop.accent == "s-accent" && "";
-    } else if (prop.pageState == 2) {
+                : prop.accent == "s" && "";
+    } else if (prop.pageState == 2 && prop.accent == "s") {
         content = (
             <>
                 <img
@@ -28,23 +23,27 @@ function Button(prop) {
     } else if (prop.pageState == 3) {
         if (prop.restart) {
             content =
-                prop.accent == "x-accent"
+                prop.accent == "x"
                     ? ""
-                    : prop.accent == "o-accent"
+                    : prop.accent == "o"
                     ? "yes, restart"
-                    : prop.accent == "s-accent" && "no, cancel";
-        } else if (!prop.restart) {
+                    : prop.accent == "s" && "no, cancel";
+        } else {
             content =
-                prop.accent == "x-accent"
+                prop.accent == "x"
                     ? ""
-                    : prop.accent == "o-accent"
+                    : prop.accent == "o"
                     ? "next round"
-                    : prop.accent == "s-accent" && "quit";
+                    : prop.accent == "s" && "quit";
         }
     }
 
     return (
-        <button type="button" className={`Button focus ${accent}`}>
+        <button
+            type="button"
+            className={`Button focus ${accentFun(prop.accent)}`}
+            onClick={prop.handelClick}
+        >
             {content}
         </button>
     );
