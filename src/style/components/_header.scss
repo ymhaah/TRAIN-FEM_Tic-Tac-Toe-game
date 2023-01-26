@@ -17,6 +17,7 @@
         .main-header {
             .header__Logo {
                 width: 100%;
+                max-height: 5em;
                 @include flex(n, c, c);
                 a {
                     cursor: pointer;

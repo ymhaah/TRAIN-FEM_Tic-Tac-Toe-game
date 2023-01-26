@@ -4,8 +4,8 @@
 
 // ################################
 
-$minFont: 14px;
-$maxFont: 20px;
+$minFont: 12px;
+$maxFont: 18px;
 $addOnMin: 1.1;
 $addOnMax: 1.2;
 
@@ -39,16 +39,10 @@ $addOnMax: 1.2;
 body {
     font-family: var(--font-family);
 }
-h1,
-h2,
-h3,
-h4,
-p,
-a:not(.Button),
-.Button {
+:where(h1, h2, h3, h4, p, a:not(.Button), .Button) {
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: #{toRem(2.5px)};
+    letter-spacing: #{toRem(2px)};
     color: var(--txt-clr);
 }
 :where(h1, h2, h3, h4, p):not(:last-child) {

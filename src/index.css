@@ -20,11 +20,12 @@
   --clr-alpha-black: 0 0% 0%;
   --clr-alpha-white: 0 0% 100%;
   --clr-alpha-ice-blue-200: 200 25% 75%;
+  --clr-alpha-blue-gray-300: 200 20% 50%;
   --clr-alpha-dark-teal-800: 198 45% 10%;
   --bg-clr: var(--clr-dark-teal-700);
   --bg-item-clr: var(--clr-dark-teal-600);
-  --txt-clr: var(--clr-ice-blue-200);
-  --accent-text-clr: var(--clr-dark-teal-800);
+  --txt-clr: hsla(var(--clr-alpha-ice-blue-200) / 0.9);
+  --accent-text-clr: hsla(var(--clr-alpha-dark-teal-800) / 0.9);
   --accent-X-clr: var(--clr-teal-blue-700);
   --accent-O-clr: var(--clr-gold-orange-800);
 }
@@ -46,15 +47,15 @@
 }
 
 :root {
-  --fs-100: clamp(0.875rem, 0.6875rem + 0.625vw, 1.25rem);
-  --fs-200: clamp(0.9625rem, 0.69375rem + 0.8958333333vw, 1.5rem);
-  --fs-300: clamp(1.05875rem, 0.688125rem + 1.2354166667vw, 1.8rem);
-  --fs-400: clamp(1.164625rem, 0.6669375rem + 1.6589583333vw, 2.16rem);
-  --fs-500: clamp(1.2810875rem, 0.62563125rem + 2.1848541667vw, 2.592rem);
-  --fs-600: clamp(1.40919625rem, 0.558594375rem + 2.8353395833vw, 3.1104rem);
-  --fs-700: clamp(1.550115875rem, 0.4589338125rem + 3.6372735417vw, 3.73248rem);
-  --fs-800: clamp(1.7051274625rem, 0.3182031938rem + 4.6230808958vw, 4.478976rem);
-  --fs-900: clamp(1.8756402088rem, 0.1260747131rem + 5.8318849854vw, 5.3747712rem);
+  --fs-100: clamp(0.75rem, 0.5625rem + 0.625vw, 1.125rem);
+  --fs-200: clamp(0.825rem, 0.5625rem + 0.875vw, 1.35rem);
+  --fs-300: clamp(0.9075rem, 0.55125rem + 1.1875vw, 1.62rem);
+  --fs-400: clamp(0.99825rem, 0.525375rem + 1.57625vw, 1.944rem);
+  --fs-500: clamp(1.098075rem, 0.4807125rem + 2.057875vw, 2.3328rem);
+  --fs-600: clamp(1.2078825rem, 0.41214375rem + 2.6524625vw, 2.79936rem);
+  --fs-700: clamp(1.32867075rem, 0.313390125rem + 3.38426875vw, 3.359232rem);
+  --fs-800: clamp(1.461537825rem, 0.1767675375rem + 4.282567625vw, 4.0310784rem);
+  --fs-900: clamp(1.6076916075rem, -0.0071096287rem + 5.3826707875vw, 4.83729408rem);
 }
 
 :root {
@@ -73,16 +74,10 @@ body {
   font-family: var(--font-family);
 }
 
-h1,
-h2,
-h3,
-h4,
-p,
-a:not(.Button),
-.Button {
+:where(h1, h2, h3, h4, p, a:not(.Button), .Button) {
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.15625rem;
+  letter-spacing: 0.125rem;
   color: var(--txt-clr);
 }
 
@@ -264,13 +259,14 @@ ul a {
 
 .focus {
   --focus-shadow: 0 0 0 transparent;
+  --accent-clr: var(--txt-clr);
   box-shadow: var(--focus-shadow), 0 0 0 -0.4em var(--bg-clr), 0 0 0 -0.6em var(--accent-clr);
   transition: box-shadow 400ms cubic-bezier(0.66, -0.2, 0.27, 1.15);
 }
 
 .focus:focus-visible {
   outline: 2px solid transparent;
-  box-shadow: var(--focus-shadow), 0 0 0 0.4em var(--bg-clr), 0 0 0 0.6em var(--accent-clr);
+  box-shadow: var(--focus-shadow), 0 0 0 0.25em var(--bg-clr), 0 0 0 0.45em var(--accent-clr);
 }
 
 img {
@@ -304,7 +300,7 @@ img {
   vertical-align: middle;
   text-align: center;
   white-space: nowrap;
-  padding: max(0.4em, 0.4rem) max(2.2em, 2.2rem);
+  padding: max(1em, 1rem) max(2.2em, 2.2rem);
   font-size: var(--fs-100);
   font-weight: var(--fw-b);
   background-color: var(--accent-clr);
@@ -373,6 +369,7 @@ img {
 
 .App .Stage1 .main-header .header__Logo {
   width: 100%;
+  max-height: 5em;
 }
 .App .Stage1 .main-header .header__Logo a {
   cursor: pointer;
@@ -389,7 +386,7 @@ img {
   border-radius: var(--border-radius);
   text-align: center;
   background-color: var(--accent-clr);
-  box-shadow: inset 0px -0.6rem 0 var(--accent-shadow-clr);
+  box-shadow: inset 0px -0.5rem 0 var(--accent-shadow-clr);
 }
 .App .Stage1 main#Game .pickXO {
   position: relative;
@@ -399,33 +396,40 @@ img {
   border-radius: var(--border-radius);
 }
 .App .Stage1 main#Game .pickXO .bg {
-  width: calc(50% - 1rem);
+  width: calc(50% - 0.75rem);
   height: calc(100% - 1rem);
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
+  right: 0.5rem;
   border-radius: var(--border-radius);
   background-color: var(--txt-clr);
 }
 .App .Stage1 main#Game .pickXO ul {
-  gap: 0.5rem;
+  gap: 1rem;
+  position: relative;
 }
 .App .Stage1 main#Game .pickXO ul li {
   width: 50%;
 }
 .App .Stage1 main#Game .pickXO ul li .Button {
   --icon-size: calc(var(--Header-icon-hight) / 2.5);
+  --focus-shadow: 0 0 0 transparent;
   background-color: transparent;
-  box-shadow: none;
 }
 .App .Stage1 main#Game .pickXO ul li .Button img {
   width: var(--icon-size);
   height: var(--icon-size);
 }
 .App .Stage1 main#Game p {
-  color: var(--clr-blue-gray-300);
+  color: hsla(var(--clr-alpha-blue-gray-300)/0.9);
 }
 
+@media screen and (max-width: 64em) {
+  .App .Container.Stage1 {
+    --container-width: 35%;
+  }
+}
 @media screen and (max-width: 48em) {
   .App .Container.Stage1 {
     --container-width: 90%;
@@ -436,6 +440,11 @@ img {
   html,
 body {
     overflow-x: clip;
+  }
+}
+@supports (height: 100dvh) {
+  #root {
+    height: 100dvh;
   }
 }
 /* For people who have motion sickness. */

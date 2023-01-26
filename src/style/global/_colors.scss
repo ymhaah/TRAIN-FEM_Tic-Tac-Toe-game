@@ -28,13 +28,14 @@
     --clr-alpha-black: 0 0% 0%;
     --clr-alpha-white: 0 0% 100%;
     --clr-alpha-ice-blue-200: 200 25% 75%;
+    --clr-alpha-blue-gray-300: 200 20% 50%;
     --clr-alpha-dark-teal-800: 198 45% 10%;
 
     // main
     --bg-clr: var(--clr-dark-teal-700);
     --bg-item-clr: var(--clr-dark-teal-600);
-    --txt-clr: var(--clr-ice-blue-200);
-    --accent-text-clr: var(--clr-dark-teal-800);
+    --txt-clr: hsla(var(--clr-alpha-ice-blue-200) / 0.9);
+    --accent-text-clr: hsla(var(--clr-alpha-dark-teal-800) / 0.9);
     --accent-X-clr: var(--clr-teal-blue-700);
     --accent-O-clr: var(--clr-gold-orange-800);
 }
