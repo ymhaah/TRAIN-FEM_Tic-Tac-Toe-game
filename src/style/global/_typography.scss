@@ -36,6 +36,54 @@ $addOnMax: 1.2;
     --fw-b: 700;
 }
 
+body {
+    font-family: var(--font-family);
+}
+h1,
+h2,
+h3,
+h4,
+p,
+a:not(.Button),
+.Button {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: #{toRem(2.5px)};
+    color: var(--txt-clr);
+}
+:where(h1, h2, h3, h4, p):not(:last-child) {
+    margin: 0 0 1rem 0;
+}
+h1,
+.h1 {
+    font-size: var(--fs-l);
+    font-weight: var(--fw-b);
+}
+h2,
+.h2 {
+    font-size: var(--fs-l);
+    font-weight: var(--fw-b);
+}
+h3,
+.h3 {
+    font-size: var(--fs-m);
+    font-weight: var(--fw-m);
+}
+h4,
+.h4 {
+    font-size: var(--fs-s);
+    font-weight: var(--fw-m);
+}
+p,
+.p {
+    font-size: var(--fs-s);
+    font-weight: var(--fw-l);
+}
+a:not(.Button) {
+    font-size: var(--fs-s);
+    font-weight: var(--fw-m);
+    text-decoration: none;
+}
 @for $inti from 1 to 10 {
     $inti: $inti * 100;
     .fs-#{$inti} {
@@ -67,49 +115,4 @@ $addOnMax: 1.2;
 }
 .fw-b {
     font-weight: var(--fw-b);
-}
-body {
-    font-family: var(--font-family);
-}
-h1,
-h2,
-h3,
-h4,
-p,
-a:not(.Button),
-.Button {
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: #{toRem(2.5px)};
-    color: var(--txt-clr);
-}
-h1,
-.h1 {
-    font-size: var(--fs-l);
-    font-weight: var(--fw-b);
-}
-h2,
-.h2 {
-    font-size: var(--fs-l);
-    font-weight: var(--fw-b);
-}
-h3,
-.h3 {
-    font-size: var(--fs-m);
-    font-weight: var(--fw-m);
-}
-h4,
-.h4 {
-    font-size: var(--fs-s);
-    font-weight: var(--fw-m);
-}
-p,
-.p {
-    font-size: var(--fs-s);
-    font-weight: var(--fw-l);
-}
-a:not(.Button) {
-    font-size: var(--fs-s);
-    font-weight: var(--fw-m);
-    text-decoration: none;
 }

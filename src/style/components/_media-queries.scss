@@ -16,8 +16,8 @@
 // For L Monitor
 
 @media screen and (max-width: #{toEm(1440px)}) {
-	// .Container {
-	// }
+    // .Container {
+    // }
 }
 // For Monitor
 
@@ -28,113 +28,109 @@
 // For laptop, S-Monitor
 
 @media screen and (max-width: #{toEm(768px)}) {
-	.main-header {
-		.Container {
-			--container-width: 90%;
-		}
-	}
-	header {
-		.Container {
-			.mobile-nav-toggle[aria-expanded="false"] {
-				display: block;
-				background-image: url(../../../../assets/images/svg/icon-hamburger.svg);
-			}
-			.mobile-nav-toggle[aria-expanded="true"] {
-				display: block;
-				background-image: url(../../../../assets/images/svg/icon-close.svg);
-			}
-			.main-navigation {
-				width: auto;
-				ul[date-visible="true"] {
-					width: 100vw;
-					height: 100vh;
-					position: absolute;
-					top: -100vh;
-					right: 0px;
-					background-color: var(--accent-clr);
-					@include flexQueries(c, c, c);
-					gap: 2rem;
-					animation-name: navOpen;
-					animation-duration: 0.5s;
-					animation-timing-function: ease;
-					animation-fill-mode: forwards;
-					z-index: 999;
-					li {
-						a {
-							color: var(--bg-clr-light);
-						}
-						// a[date-selected="false"]:hover::after,
-						// a[date-selected="false"]:focus-visible::after,
-						// a[date-selected="true"]::after {
-						// 	content: "";
-						// 	outline: none;
-						// 	position: absolute;
-						// 	width: #{toRem(3px)};
-						// 	height: 100%;
-						// 	background-color: hsl(var(--clr-alpha-white) / 0.5);
-						// 	bottom: 0;
-						// 	left: 99%;
-						// }
+    .App {
+        .Container.Stage1 {
+            --container-width: 90%;
+        }
+        // .Container.Stage2 {
+        //     --container-width: 30%;
+        // }
+        // .Container.Stage3 {
+        //     --container-width: 30%;
+        // }
+    }
 
-						// a[date-selected="true"]::after {
-						// 	background-color: var(--txt-clr);
-						// }
-					}
-					// li a[date-selected="false"]:hover::after,
-					// li a[date-selected="false"]:focus-visible::after {
-					// 	content: "";
-					// 	outline: none;
-					// 	position: absolute;
-					// 	width: 3px;
-					// 	height: 100%;
-					// 	background-color: var(--accent-clr);
-					// 	bottom: 0;
-					// 	left: 99%;
-					// }
+    // header {
+    //     .Container {
+    //         .mobile-nav-toggle[aria-expanded="false"] {
+    //             display: block;
+    //             background-image: url(../../../../assets/images/svg/icon-hamburger.svg);
+    //         }
+    //         .mobile-nav-toggle[aria-expanded="true"] {
+    //             display: block;
+    //             background-image: url(../../../../assets/images/svg/icon-close.svg);
+    //         }
+    //         .main-navigation {
+    //             width: auto;
+    //             ul[date-visible="true"] {
+    //                 width: 100vw;
+    //                 height: 100vh;
+    //                 position: absolute;
+    //                 top: -100vh;
+    //                 right: 0px;
+    //                 background-color: var(--accent-clr);
+    //                 @include flexQueries(c, c, c);
+    //                 gap: 2rem;
+    //                 animation-name: navOpen;
+    //                 animation-duration: 0.5s;
+    //                 animation-timing-function: ease;
+    //                 animation-fill-mode: forwards;
+    //                 z-index: 999;
+    //                 li {
+    //                     a {
+    //                         color: var(--bg-clr-light);
+    //                     }
+    //                     // a[date-selected="false"]:hover::after,
+    //                     // a[date-selected="false"]:focus-visible::after,
+    //                     // a[date-selected="true"]::after {
+    //                     // 	content: "";
+    //                     // 	outline: none;
+    //                     // 	position: absolute;
+    //                     // 	width: #{toRem(3px)};
+    //                     // 	height: 100%;
+    //                     // 	background-color: hsl(var(--clr-alpha-white) / 0.5);
+    //                     // 	bottom: 0;
+    //                     // 	left: 99%;
+    //                     // }
 
-					// li a[date-selected="true"]::after {
-					// 	content: "";
-					// 	outline: none;
-					// 	position: absolute;
-					// 	width: 3px;
-					// 	height: 100%;
-					// 	// background-color: var();
-					// 	bottom: 0;
-					// 	left: 99%;
-					// }
-					@supports (height: fit-content) {
-						li {
-							height: fit-content;
-						}
-					}
-					@supports not (height: fit-content) {
-						li {
-							height: auto;
-						}
-					}
-				}
-				ul[date-visible="false"] {
-					display: none;
-				}
-				@keyframes navOpen {
-					to {
-						top: 0%;
-					}
-				}
-			}
-		}
-	}
+    //                     // a[date-selected="true"]::after {
+    //                     // 	background-color: var(--txt-clr);
+    //                     // }
+    //                 }
+    //                 // li a[date-selected="false"]:hover::after,
+    //                 // li a[date-selected="false"]:focus-visible::after {
+    //                 // 	content: "";
+    //                 // 	outline: none;
+    //                 // 	position: absolute;
+    //                 // 	width: 3px;
+    //                 // 	height: 100%;
+    //                 // 	background-color: var(--accent-clr);
+    //                 // 	bottom: 0;
+    //                 // 	left: 99%;
+    //                 // }
 
-	// .Container {
-	// }
-	.Button,
-	.inputFiled {
-		width: 100% !important;
-	}
-	.Button:not(:last-child),
-	.inputFiled:not(:last-child) {
-		margin: 0 0 1rem 0;
-	}
+    //                 // li a[date-selected="true"]::after {
+    //                 // 	content: "";
+    //                 // 	outline: none;
+    //                 // 	position: absolute;
+    //                 // 	width: 3px;
+    //                 // 	height: 100%;
+    //                 // 	// background-color: var();
+    //                 // 	bottom: 0;
+    //                 // 	left: 99%;
+    //                 // }
+    //                 @supports (height: fit-content) {
+    //                     li {
+    //                         height: fit-content;
+    //                     }
+    //                 }
+    //                 @supports not (height: fit-content) {
+    //                     li {
+    //                         height: auto;
+    //                     }
+    //                 }
+    //             }
+    //             ul[date-visible="false"] {
+    //                 display: none;
+    //             }
+    //             @keyframes navOpen {
+    //                 to {
+    //                     top: 0%;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
 @media screen and (min-width: #{toEm(769px)}) {
 }
@@ -162,23 +158,23 @@
 // 	}
 // }
 @supports (overflow-x: clip) {
-	html,
-	body {
-		overflow-x: clip;
-	}
+    html,
+    body {
+        overflow-x: clip;
+    }
 }
 
 /* For people who have motion sickness. */
 @media (prefers-reduced-motion: reduce) {
-	*,
-	::before,
-	::after {
-		animation-delay: -1ms !important;
-		animation-duration: 1ms !important;
-		animation-iteration-count: 1 !important;
-		background-attachment: initial !important;
-		scroll-behavior: auto !important;
-		transition-delay: 0s !important;
-		transition-duration: 0s !important;
-	}
+    *,
+    ::before,
+    ::after {
+        animation-delay: -1ms !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        background-attachment: initial !important;
+        scroll-behavior: auto !important;
+        transition-delay: 0s !important;
+        transition-duration: 0s !important;
+    }
 }

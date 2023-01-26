@@ -5,19 +5,52 @@
 // @include flexForPhon(cr,2);
 // @include grid(2, 2, fr, 1rem)
 
-[aria-labelledby="hero title"] {
-    width: 100vw;
-    height: calc(100vh - var(--Header-hight));
+.App {
     .Container {
-        --container-width: 80%;
-        .Hero {
+    }
+    .Stage1 {
+        main#Game {
             width: 100%;
-            height: 100%;
-            @include flexForPhon(c, 2);
-
-            .Hero-Text {
+            padding: 1.5rem;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+            text-align: center;
+            background-color: var(--accent-clr);
+            box-shadow: inset 0px -0.6rem 0 var(--accent-shadow-clr);
+            .pickXO {
+                position: relative;
+                padding: 0.5rem;
+                margin: 1.5rem 0;
+                background-color: var(--bg-clr);
+                border-radius: var(--border-radius);
+                .bg {
+                    width: calc(50% - 1rem);
+                    height: calc(100% - 1rem);
+                    position: absolute;
+                    top: 0.5rem;
+                    left: 0.5rem;
+                    border-radius: var(--border-radius);
+                    background-color: var(--txt-clr);
+                }
+                ul {
+                    @include flex(r, c, c);
+                    gap: 0.5rem;
+                    li {
+                        width: 50%;
+                        .Button {
+                            --icon-size: calc(var(--Header-icon-hight) / 2.5);
+                            background-color: transparent;
+                            box-shadow: none;
+                            img {
+                                width: var(--icon-size);
+                                height: var(--icon-size);
+                            }
+                        }
+                    }
+                }
             }
-            .Hero-Star {
+            p {
+                color: var(--clr-blue-gray-300);
             }
         }
     }
