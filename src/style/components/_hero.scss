@@ -31,7 +31,8 @@
                     left: 0.5rem;
                     right: 0.5rem;
                     border-radius: var(--border-radius);
-                    background-color: var(--txt-clr);
+                    // background-color: var(--txt-clr);
+                    background-color: rgba(210, 180, 140, 0.219);
                 }
                 ul {
                     @include flex(r, c, c);
@@ -40,12 +41,15 @@
                     li {
                         width: 50%;
                         .Button {
-                            --icon-size: calc(var(--Header-icon-hight) / 2.5);
+                            --icon-size: 2.5rem;
                             --focus-shadow: 0 0 0 transparent;
                             background-color: transparent;
-                            img {
+                            svg {
                                 width: var(--icon-size);
                                 height: var(--icon-size);
+                                path {
+                                    // fill: ;
+                                }
                             }
                         }
                     }

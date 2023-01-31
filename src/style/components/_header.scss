@@ -7,7 +7,7 @@
 
 :root {
     --Header-hight: 5rem;
-    --Header-icon-hight: 4.5em;
+    --Header-icon-hight: 5rem;
 }
 
 .App {
@@ -22,7 +22,7 @@
                 a {
                     cursor: pointer;
                     white-space: nowrap;
-                    img {
+                    svg {
                         width: var(--Header-icon-hight);
                     }
                 }

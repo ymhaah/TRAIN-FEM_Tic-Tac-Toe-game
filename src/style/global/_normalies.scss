@@ -84,10 +84,11 @@ ul {
     box-shadow: var(--focus-shadow), 0 0 0 0.25em var(--bg-clr),
         0 0 0 0.45em var(--accent-clr);
 }
-img {
+img,
+svg {
     // max-width: 100%;
     user-select: none;
-    // display: block;
+    display: block;
 }
 [type="button"] {
     user-select: none;
@@ -124,12 +125,8 @@ img {
 .Button:not(:last-child) {
     margin: 0 0 1rem 0;
 }
-.Button:has(img) {
-    padding: max(1em, 1rem) max(0.5em, 0.5rem);
-}
-.Button img {
-    width: var(--fs-100);
-    height: var(--fs-100);
+.Button:has(img, svg) {
+    padding: max(0.1em, 0.1rem) max(0.5em, 0.5rem);
 }
 .visually-hidden {
     position: absolute;
