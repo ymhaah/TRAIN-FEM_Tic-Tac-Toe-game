@@ -32,6 +32,7 @@ body {
 #root {
     height: 100vh;
     width: 100vw;
+    position: relative;
     background-color: var(--bg-clr);
     padding: 1rem 0;
     @include flex(r, c, c);
@@ -118,15 +119,17 @@ svg {
     border-radius: var(--border-radius);
     --focus-shadow: inset 0px -0.4rem 0 var(--accent-shadow-clr);
 }
-.Button:active,
-.Button:hover {
+.Button:has(img, svg) {
+    padding: max(0.1em, 0.1rem);
+}
+.Button:where(:hover, :active) {
     --focus-shadow: inset 0px -3em 0 var(--accent-shadow-clr);
+}
+.Button:has(img, svg):where(:hover, :active) {
+    opacity: 0.7;
 }
 .Button:not(:last-child) {
     margin: 0 0 1rem 0;
-}
-.Button:has(img, svg) {
-    padding: max(0.1em, 0.1rem) max(0.5em, 0.5rem);
 }
 .visually-hidden {
     position: absolute;
@@ -155,4 +158,13 @@ svg {
 .accent-S-clr {
     --accent-clr: var(--txt-clr);
     --accent-shadow-clr: var(--clr-blue-gray-300);
+}
+.result {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    background-color: red;
 }

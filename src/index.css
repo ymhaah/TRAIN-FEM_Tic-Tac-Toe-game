@@ -218,6 +218,7 @@ body {
 #root {
   height: 100vh;
   width: 100vw;
+  position: relative;
   background-color: var(--bg-clr);
   padding: 1rem 0;
 }
@@ -313,17 +314,20 @@ svg {
   --focus-shadow: inset 0px -0.4rem 0 var(--accent-shadow-clr);
 }
 
-.Button:active,
-.Button:hover {
+.Button:has(img, svg) {
+  padding: max(0.1em, 0.1rem);
+}
+
+.Button:where(:hover, :active) {
   --focus-shadow: inset 0px -3em 0 var(--accent-shadow-clr);
+}
+
+.Button:has(img, svg):where(:hover, :active) {
+  opacity: 0.7;
 }
 
 .Button:not(:last-child) {
   margin: 0 0 1rem 0;
-}
-
-.Button:has(img, svg) {
-  padding: max(0.1em, 0.1rem) max(0.5em, 0.5rem);
 }
 
 .visually-hidden {
@@ -359,6 +363,16 @@ svg {
   --accent-shadow-clr: var(--clr-blue-gray-300);
 }
 
+.result {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  background-color: red;
+}
+
 :root {
   --Header-hight: 5rem;
   --Header-icon-hight: 5rem;
@@ -386,21 +400,21 @@ svg {
   box-shadow: inset 0px -0.5rem 0 var(--accent-shadow-clr);
 }
 .App .Stage1 main#Game .pickXO {
+  --pd-top: 0.5rem;
   position: relative;
-  padding: 0.5rem;
+  padding: var(--pd-top);
   margin: 1.5rem 0;
   background-color: var(--bg-clr);
   border-radius: var(--border-radius);
 }
 .App .Stage1 main#Game .pickXO .bg {
-  width: calc(50% - 0.75rem);
+  width: calc(50% - 1rem);
   height: calc(100% - 1rem);
   position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  right: 0.5rem;
+  top: var(--pd-top);
+  left: var(--pd-top);
   border-radius: var(--border-radius);
-  background-color: rgba(210, 180, 140, 0.219);
+  background-color: var(--txt-clr);
 }
 .App .Stage1 main#Game .pickXO ul {
   gap: 1rem;

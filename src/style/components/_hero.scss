@@ -18,21 +18,20 @@
             background-color: var(--accent-clr);
             box-shadow: inset 0px -0.5rem 0 var(--accent-shadow-clr);
             .pickXO {
+                --pd-top: 0.5rem;
                 position: relative;
-                padding: 0.5rem;
+                padding: var(--pd-top);
                 margin: 1.5rem 0;
                 background-color: var(--bg-clr);
                 border-radius: var(--border-radius);
                 .bg {
-                    width: calc(50% - 0.75rem);
+                    width: calc(50% - 1rem);
                     height: calc(100% - 1rem);
                     position: absolute;
-                    top: 0.5rem;
-                    left: 0.5rem;
-                    right: 0.5rem;
+                    top: var(--pd-top);
+                    left: var(--pd-top);
                     border-radius: var(--border-radius);
-                    // background-color: var(--txt-clr);
-                    background-color: rgba(210, 180, 140, 0.219);
+                    background-color: var(--txt-clr);
                 }
                 ul {
                     @include flex(r, c, c);
@@ -47,9 +46,6 @@
                             svg {
                                 width: var(--icon-size);
                                 height: var(--icon-size);
-                                path {
-                                    // fill: ;
-                                }
                             }
                         }
                     }

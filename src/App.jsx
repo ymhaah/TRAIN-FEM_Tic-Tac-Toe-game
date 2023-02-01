@@ -1,15 +1,17 @@
 import { useState } from "react";
 import "./index.css";
-import NewGamePage from "./pages/NewGamePage.jsx";
-import PlayingPage from "./pages/playingPage";
-import Button from "./components/uiComponents/Button";
-// import Result from "./components/uiComponents/Result.jsx";
+import Header from "./components/Header";
+import PickXO from "./components/PickXO";
+import Footer from "./components/Footer";
+import Result from "./components/resultAndRestartPage";
+
 console.log(`Made with Love by Youssef Hafnawi`);
 
 function App() {
     const [pageState, setPageState] = useState(1);
     const [cpu, setCpu] = useState(false);
-    const [playWite, setPlayWite] = useState(true); // ! true =  O , false = X
+    const [playWite, setPlayWite] = useState(false); // ! true =  O , false = X
+
     const [restart, setRestart] = useState(false);
 
     function updatePageState(state) {
@@ -21,15 +23,30 @@ function App() {
     function playWithCpu(state) {
         setCpu(state);
     }
-    console.log(pageState);
+    function isRestart() {
+        setRestart(true);
+        setPageState(3);
+    }
     return (
         <div className="App">
-            <NewGamePage
-                playWithCpu={playWithCpu}
-                playerIS={playerIS}
-                pageState={updatePageState}
-            />
-            {/* <PlayingPage cpu={cpu} /> */}
+            <a
+                href="#Game"
+                className="visually-hidden"
+                title="click Enter to skip navigation menu"
+            >
+                skip to the content
+            </a>
+            <div className="Container Stage1">
+                <Header pageState={pageState} isRestart={isRestart} />
+                <PickXO pageState={pageState} playerIS={playerIS} />
+                <Footer
+                    pageState={pageState}
+                    updatePageState={updatePageState}
+                    playWithCpu={playWithCpu}
+                />
+            </div>
+            {pageState == 3 && <Result />}
+            {/* // * finish his state */}
         </div>
     );
 }
