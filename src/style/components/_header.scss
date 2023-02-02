@@ -11,14 +11,12 @@
 }
 
 .App {
-    .Container.Stage1 {
-    }
-    .Stage1 {
+    .Container {
         .main-header {
+            width: 100%;
+            @include flex(n, c, c);
             .header__Logo {
-                width: 100%;
-                max-height: 5em;
-                @include flex(n, c, c);
+                height: 2rem;
                 a {
                     cursor: pointer;
                     white-space: nowrap;
@@ -27,6 +25,20 @@
                     }
                 }
             }
+        }
+    }
+    .Stage2 {
+        .main-header {
+            @include flex(n, sb, c);
+        }
+        // @include flex(n, sb, c);
+        .header__Logo {
+        }
+        .header__turn {
+        }
+        .Button {
+            width: auto;
+            height: 2rem;
         }
     }
 }

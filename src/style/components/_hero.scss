@@ -7,8 +7,6 @@
 
 .App {
     .Container {
-    }
-    .Stage1 {
         main#Game {
             width: 100%;
             padding: 1.5rem;
@@ -55,5 +53,7 @@
                 color: hsla(var(--clr-alpha-blue-gray-300) / 0.9);
             }
         }
+    }
+    .Stage2 {
     }
 }

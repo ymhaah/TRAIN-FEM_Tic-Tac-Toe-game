@@ -30,19 +30,23 @@
   --accent-O-clr: var(--clr-gold-orange-800);
 }
 
-.App .Stage1 main#Game .pickXO ul, .App .Stage1 .main-header .header__Logo, #root {
+.App .Container main#Game .pickXO ul, .App .Container .main-header, .App .Stage2 .main-header, #root {
   display: flex;
 }
 
-.App .Stage1 main#Game .pickXO ul, #root {
+.App .Container main#Game .pickXO ul, #root {
   flex-direction: row;
 }
 
-.App .Stage1 main#Game .pickXO ul, .App .Stage1 .main-header .header__Logo, #root {
+.App .Container main#Game .pickXO ul, .App .Container .main-header, #root {
   justify-content: center;
 }
 
-.App .Stage1 main#Game .pickXO ul, .App .Stage1 .main-header .header__Logo, #root {
+.App .Stage2 .main-header {
+  justify-content: space-between;
+}
+
+.App .Container main#Game .pickXO ul, .App .Container .main-header, .App .Stage2 .main-header, #root {
   align-items: center;
 }
 
@@ -200,7 +204,6 @@ a:not(.Button) {
 }
 
 body {
-  position: relative;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -218,7 +221,6 @@ body {
 #root {
   height: 100vh;
   width: 100vw;
-  position: relative;
   background-color: var(--bg-clr);
   padding: 1rem 0;
 }
@@ -235,7 +237,7 @@ body {
   margin-inline: auto;
 }
 
-.App .Container.Stage1 {
+.App .Container {
   --container-width: 30%;
 }
 
@@ -315,7 +317,7 @@ svg {
 }
 
 .Button:has(img, svg) {
-  padding: max(0.1em, 0.1rem);
+  padding: max(0.5em, 0.5rem) max(0.6em, 0.6rem);
 }
 
 .Button:where(:hover, :active) {
@@ -378,19 +380,25 @@ svg {
   --Header-icon-hight: 5rem;
 }
 
-.App .Stage1 .main-header .header__Logo {
+.App .Container .main-header {
   width: 100%;
-  max-height: 5em;
 }
-.App .Stage1 .main-header .header__Logo a {
+.App .Container .main-header .header__Logo {
+  height: 2rem;
+}
+.App .Container .main-header .header__Logo a {
   cursor: pointer;
   white-space: nowrap;
 }
-.App .Stage1 .main-header .header__Logo a svg {
+.App .Container .main-header .header__Logo a svg {
   width: var(--Header-icon-hight);
 }
+.App .Stage2 .Button {
+  width: auto;
+  height: 2rem;
+}
 
-.App .Stage1 main#Game {
+.App .Container main#Game {
   width: 100%;
   padding: 1.5rem;
   margin: 3rem 0;
@@ -399,7 +407,7 @@ svg {
   background-color: var(--accent-clr);
   box-shadow: inset 0px -0.5rem 0 var(--accent-shadow-clr);
 }
-.App .Stage1 main#Game .pickXO {
+.App .Container main#Game .pickXO {
   --pd-top: 0.5rem;
   position: relative;
   padding: var(--pd-top);
@@ -407,7 +415,7 @@ svg {
   background-color: var(--bg-clr);
   border-radius: var(--border-radius);
 }
-.App .Stage1 main#Game .pickXO .bg {
+.App .Container main#Game .pickXO .bg {
   width: calc(50% - 1rem);
   height: calc(100% - 1rem);
   position: absolute;
@@ -416,26 +424,25 @@ svg {
   border-radius: var(--border-radius);
   background-color: var(--txt-clr);
 }
-.App .Stage1 main#Game .pickXO ul {
+.App .Container main#Game .pickXO ul {
   gap: 1rem;
   position: relative;
 }
-.App .Stage1 main#Game .pickXO ul li {
+.App .Container main#Game .pickXO ul li {
   width: 50%;
 }
-.App .Stage1 main#Game .pickXO ul li .Button {
+.App .Container main#Game .pickXO ul li .Button {
   --icon-size: 2.5rem;
   --focus-shadow: 0 0 0 transparent;
   background-color: transparent;
 }
-.App .Stage1 main#Game .pickXO ul li .Button svg {
+.App .Container main#Game .pickXO ul li .Button svg {
   width: var(--icon-size);
   height: var(--icon-size);
 }
-.App .Stage1 main#Game p {
+.App .Container main#Game p {
   color: hsla(var(--clr-alpha-blue-gray-300)/0.9);
 }
-
 @media screen and (max-width: 64em) {
   .App .Container.Stage1 {
     --container-width: 35%;

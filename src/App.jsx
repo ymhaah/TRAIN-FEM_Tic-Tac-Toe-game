@@ -36,7 +36,7 @@ function App() {
             >
                 skip to the content
             </a>
-            <div className="Container Stage1">
+            <div className={`Container Stage${pageState}`}>
                 <Header pageState={pageState} isRestart={isRestart} />
                 <PickXO pageState={pageState} playerIS={playerIS} />
                 <Footer
