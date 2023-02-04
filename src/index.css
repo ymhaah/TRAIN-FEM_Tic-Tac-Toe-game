@@ -30,15 +30,15 @@
   --accent-O-clr: var(--clr-gold-orange-800);
 }
 
-.App .Container main#Game .pickXO ul, .App .Container .main-header, .App .Stage2 .main-header, #root {
+.App .Container main#Game .pickXO ul, .App .Container .main-header, .App .Stage2 .main-header, .App .Stage2 .main-header .header__turn, .App {
   display: flex;
 }
 
-.App .Container main#Game .pickXO ul, #root {
+.App .Container main#Game .pickXO ul, .App .Stage2 .main-header .header__turn, .App {
   flex-direction: row;
 }
 
-.App .Container main#Game .pickXO ul, .App .Container .main-header, #root {
+.App .Container main#Game .pickXO ul, .App .Container .main-header, .App {
   justify-content: center;
 }
 
@@ -46,7 +46,11 @@
   justify-content: space-between;
 }
 
-.App .Container main#Game .pickXO ul, .App .Container .main-header, .App .Stage2 .main-header, #root {
+.App .Stage2 .main-header .header__turn {
+  justify-content: space-evenly;
+}
+
+.App .Container main#Game .pickXO ul, .App .Container .main-header, .App .Stage2 .main-header, .App .Stage2 .main-header .header__turn, .App {
   align-items: center;
 }
 
@@ -78,14 +82,14 @@ body {
   font-family: var(--font-family);
 }
 
-:where(h1, h2, h3, h4, p, a:not(.Button), .Button) {
+:where(h1, h2, h3, h4, p, a:not(.Button), .Button, span) {
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.125rem;
   color: var(--txt-clr);
 }
 
-:where(h1, h2, h3, h4, p):not(:last-child) {
+:where(h1, h2, h3, h4, p, span):not(:last-child) {
   margin: 0 0 1rem 0;
 }
 
@@ -227,14 +231,15 @@ body {
 
 .App {
   width: 100%;
-  min-height: 50%;
+  height: 100%;
 }
 
 .Container {
   --container-width: 50%;
-  height: 100%;
+  min-height: 50%;
+  max-height: 100%;
   width: var(--container-width, 90%);
-  margin-inline: auto;
+  margin: auto;
 }
 
 .App .Container {
@@ -293,6 +298,8 @@ svg {
      -moz-appearance: button;
           appearance: button;
   font: inherit;
+  border: none;
+  font-size: var(--fs-100);
 }
 
 .Button {
@@ -311,7 +318,6 @@ svg {
   background-color: var(--accent-clr);
   transition: box-shadow 250ms cubic-bezier(0.66, -0.2, 0.27, 1.15);
   color: var(--accent-text-clr);
-  border: none;
   border-radius: var(--border-radius);
   --focus-shadow: inset 0px -0.4rem 0 var(--accent-shadow-clr);
 }
@@ -320,7 +326,7 @@ svg {
   padding: max(0.5em, 0.5rem) max(0.6em, 0.6rem);
 }
 
-.Button:where(:hover, :active) {
+.Button:where(:hover, :active):not(:has(img, svg)) {
   --focus-shadow: inset 0px -3em 0 var(--accent-shadow-clr);
 }
 
@@ -376,7 +382,7 @@ svg {
 }
 
 :root {
-  --Header-hight: 5rem;
+  --Header-hight: 2rem;
   --Header-icon-hight: 5rem;
 }
 
@@ -384,7 +390,7 @@ svg {
   width: 100%;
 }
 .App .Container .main-header .header__Logo {
-  height: 2rem;
+  height: var(--Header-hight);
 }
 .App .Container .main-header .header__Logo a {
   cursor: pointer;
@@ -392,6 +398,18 @@ svg {
 }
 .App .Container .main-header .header__Logo a svg {
   width: var(--Header-icon-hight);
+}
+.App .Stage2 .main-header .header__turn {
+  height: 100%;
+  gap: calc(var(--Header-hight) / 2.5);
+  background-color: var(--bg-item-clr);
+  padding: calc(var(--Header-hight) / 2.5) calc(var(--Header-hight) / 1.25);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+.App .Stage2 .main-header .header__turn svg {
+  width: calc(var(--fs-s) * 1.5);
+  height: calc(var(--fs-s) * 1.5);
 }
 .App .Stage2 .Button {
   width: auto;
@@ -443,13 +461,57 @@ svg {
 .App .Container main#Game p {
   color: hsla(var(--clr-alpha-blue-gray-300)/0.9);
 }
+.App .Stage2 main#Game {
+  background-color: unset;
+  box-shadow: unset;
+  padding: unset;
+  margin: 1.5rem 0;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.App .Stage2 main#Game > div:has(button) button {
+  --focus-shadow: inset 0px -0.4rem 0 var(--accent-shadow-clr);
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  background-color: var(--accent-clr);
+}
+
+.App .Stage2 footer {
+  width: 100%;
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  gap: 1rem;
+}
+.App .Stage2 footer > div {
+  background-color: var(--accent-clr);
+  border-radius: var(--border-radius);
+  text-align: center;
+  padding: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.App .Stage2 footer > div h3,
+.App .Stage2 footer > div p {
+  color: var(--accent-text-clr);
+  margin: 0;
+}
+
 @media screen and (max-width: 64em) {
-  .App .Container.Stage1 {
+  .App .Container {
     --container-width: 35%;
+  }
+  .App .Container.Stage2 {
+    --container-width: 38%;
   }
 }
 @media screen and (max-width: 48em) {
-  .App .Container.Stage1 {
+  .App .Container {
     --container-width: 90%;
   }
 }
@@ -463,6 +525,11 @@ body {
 @supports (height: 100dvh) {
   #root {
     height: 100dvh;
+  }
+}
+@supports (aspect-ratio: 1/1) {
+  .Stage2 main#Game > div:has(button) {
+    aspect-ratio: 1/1;
   }
 }
 /* For people who have motion sickness. */

@@ -5,7 +5,7 @@ function Result() {
     let pageState = 3;
 
     return (
-        <div className="result">
+        <div id="result-and-restart">
             <p>Lorem ipsum dolor sit.</p>
             <h1>Lorem ipsum dolor sit</h1>
             <Button

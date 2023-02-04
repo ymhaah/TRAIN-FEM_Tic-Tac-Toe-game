@@ -23,12 +23,12 @@
 
 @media screen and (max-width: #{toEm(1024px)}) {
     .App {
-        .Container.Stage1 {
+        .Container {
             --container-width: 35%;
         }
-        // .Container.Stage2 {
-        //     --container-width: 30%;
-        // }
+        .Container.Stage2 {
+            --container-width: 38%;
+        }
         // .Container.Stage3 {
         //     --container-width: 30%;
         // }
@@ -40,7 +40,7 @@
 
 @media screen and (max-width: #{toEm(768px)}) {
     .App {
-        .Container.Stage1 {
+        .Container {
             --container-width: 90%;
         }
         // .Container.Stage2 {
@@ -177,6 +177,15 @@
 @supports (height: 100dvh) {
     #root {
         height: 100dvh;
+    }
+}
+@supports (aspect-ratio: 1 / 1) {
+    .Stage2 {
+        main#Game {
+            > div:has(button) {
+                aspect-ratio: 1 / 1;
+            }
+        }
     }
 }
 

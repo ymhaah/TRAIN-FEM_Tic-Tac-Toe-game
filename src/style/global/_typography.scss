@@ -39,13 +39,13 @@ $addOnMax: 1.2;
 body {
     font-family: var(--font-family);
 }
-:where(h1, h2, h3, h4, p, a:not(.Button), .Button) {
+:where(h1, h2, h3, h4, p, a:not(.Button), .Button, span) {
     margin: 0;
     text-transform: uppercase;
     letter-spacing: #{toRem(2px)};
     color: var(--txt-clr);
 }
-:where(h1, h2, h3, h4, p):not(:last-child) {
+:where(h1, h2, h3, h4, p, span):not(:last-child) {
     margin: 0 0 1rem 0;
 }
 h1,

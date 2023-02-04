@@ -55,5 +55,23 @@
         }
     }
     .Stage2 {
+        main#Game {
+            background-color: unset;
+            box-shadow: unset;
+            padding: unset;
+            margin: 1.5rem 0;
+            @include grid(3, 3, fr, 1rem);
+            > div:has(button) {
+                button {
+                    // ! make the hight = width with js
+                    --focus-shadow: inset 0px -0.4rem 0 var(--accent-shadow-clr);
+                    width: 100%;
+                    height: 100%;
+                    padding: 1rem;
+                    border-radius: var(--border-radius);
+                    background-color: var(--accent-clr);
+                }
+            }
+        }
     }
 }
