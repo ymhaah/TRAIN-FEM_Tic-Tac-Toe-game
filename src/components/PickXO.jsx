@@ -1,8 +1,11 @@
 import React from "react";
 import { gsap } from "gsap";
+import playerFun from "../utils/player.js";
 
 let duration = 0.5;
 let delay = 0.1;
+
+// playerFun(items, playerIndex, player)
 
 function PickXO(prop) {
     let [pgWidth, setPgWidth] = React.useState();
