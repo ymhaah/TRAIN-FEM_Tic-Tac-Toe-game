@@ -26,13 +26,13 @@ function g_toStage2() {
     let logo = document.querySelector(".header__Logo");
     let g_logo = Flip.getState(logo);
 
-    Flip.to(g_logo, {
-        duration: duration,
-        delay: delay,
-        scale: 3,
-        absolute: true,
-        scale: true,
-    });
+    // Flip.to(g_logo, {
+    //     duration: duration,
+    //     delay: delay,
+    //     scale: 3,
+    //     absolute: true,
+    //     scale: true,
+    // });
 }
 
 function Footer(prop) {

@@ -9,9 +9,10 @@ let delay = 0.1;
 
 function PickXO(prop) {
     let [pgWidth, setPgWidth] = React.useState();
+    let bg;
 
     React.useEffect(() => {
-        let bg = document.querySelector(".bg");
+        bg = document.querySelector(".bg");
         setPgWidth(bg.offsetWidth);
         window.onresize = () => {
             setPgWidth(bg.offsetWidth);
