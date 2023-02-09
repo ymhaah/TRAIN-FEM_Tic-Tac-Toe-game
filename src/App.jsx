@@ -8,7 +8,7 @@ import Result from "./components/resultAndRestartPage";
 console.log(`Made with Love by Youssef Hafnawi`);
 
 function App() {
-    const [pageState, setPageState] = useState(1);
+    const [pageState, setPageState] = useState(2);
     const [cpu, setCpu] = useState(false);
     const [playWite, setPlayWite] = useState(false); // ! true =  O , false = X
 

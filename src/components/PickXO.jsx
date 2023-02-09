@@ -1,26 +1,50 @@
 import React from "react";
 import { gsap } from "gsap";
 import playerFun from "../utils/player.js";
+import itemInfoFun from "../utils/itemInfo.js";
 
 let duration = 0.5;
 let delay = 0.1;
 
 // playerFun(items, playerIndex, player)
+// itemInfoFun(items)
+
+// playerFun(gameItems, playerIndex, player);
 
 function PickXO(prop) {
     let [pgWidth, setPgWidth] = React.useState();
     let bg;
 
+    let dimensions = 9;
+    let gameItems = [];
+
+    function GameItem(prop) {
+        return (
+            <button
+                type="button"
+                className="focus accent-M-clr"
+                title="click to play your turn"
+                onClick={prop.handelClick}
+            ></button>
+        );
+    }
+    for (let i = 0; i < dimensions; i++) {
+        gameItems.push({ item: <GameItem /> });
+    }
+    itemInfoFun(gameItems);
+
     React.useEffect(() => {
-        bg = document.querySelector(".bg");
-        setPgWidth(bg.offsetWidth);
-        window.onresize = () => {
+        if (prop.pageState == 1) {
+            bg = document.querySelector(".bg");
             setPgWidth(bg.offsetWidth);
-            gsap.to(bg, {
-                x: `${pgWidth + 16}px`,
-                duration: 0,
-            });
-        };
+            window.onresize = () => {
+                setPgWidth(bg.offsetWidth);
+                gsap.to(bg, {
+                    x: `${pgWidth + 16}px`,
+                    duration: 0,
+                });
+            };
+        }
     }, [window.innerWidth]);
 
     return (
@@ -119,6 +143,14 @@ function PickXO(prop) {
                     <p>remember : X goes first</p>
                 </>
             )}
+            {prop.pageState == 2 &&
+                gameItems.map((ele) => {
+                    return (
+                        <div key={ele.ItemInfo.id}>
+                            <GameItem />
+                        </div>
+                    );
+                })}
         </main>
     );
 }
