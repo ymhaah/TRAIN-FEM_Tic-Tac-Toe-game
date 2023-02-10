@@ -11,6 +11,8 @@ let delay = 0.1;
 
 // playerFun(gameItems, playerIndex, player);
 
+// for github
+
 function PickXO(prop) {
     let [pgWidth, setPgWidth] = React.useState();
     let bg;
