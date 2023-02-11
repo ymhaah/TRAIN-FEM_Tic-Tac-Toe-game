@@ -2,6 +2,8 @@ import React from "react";
 import { gsap } from "gsap";
 import playerFun from "../utils/player.js";
 import itemInfoFun from "../utils/itemInfo.js";
+import XIcon from "./uiComponents/XIcon.jsx";
+import OIcon from "./uiComponents/OIcon.jsx";
 
 let duration = 0.5;
 let delay = 0.1;
@@ -9,31 +11,45 @@ let delay = 0.1;
 // playerFun(items, playerIndex, player)
 // itemInfoFun(items)
 
-// playerFun(gameItems, playerIndex, player);
-
 // for github
+
+function gameResult(gameItems) {}
+
+function gameSystem(cpu) {
+    if (cpu) {
+        // ! play with cpu, so make the cpu system
+    } else {
+        // ! play with another player, so see how win
+    }
+}
+
+let dimensions = 9;
+let gameItems = [];
+
+function GameBoardItem(prop) {
+    return (
+        <button
+            type="button"
+            className="focus accent-M-clr" // ! change the accent class when wining
+            title="click to play your turn"
+            data-played="true" // ! change this one when click
+            onClick={prop.handelClick}
+        >
+            <XIcon hover={false} accent="x" />{" "}
+            {/* // ! change the accent when wining */}
+            {/* <OIcon hover={true} accent="o" /> */}
+        </button>
+    );
+}
+for (let i = 0; i < dimensions; i++) {
+    gameItems.push({ item: <GameBoardItem /> });
+}
+itemInfoFun(gameItems);
+// console.log("gameItems", gameItems);
 
 function PickXO(prop) {
     let [pgWidth, setPgWidth] = React.useState();
     let bg;
-
-    let dimensions = 9;
-    let gameItems = [];
-
-    function GameItem(prop) {
-        return (
-            <button
-                type="button"
-                className="focus accent-M-clr"
-                title="click to play your turn"
-                onClick={prop.handelClick}
-            ></button>
-        );
-    }
-    for (let i = 0; i < dimensions; i++) {
-        gameItems.push({ item: <GameItem /> });
-    }
-    itemInfoFun(gameItems);
 
     React.useEffect(() => {
         if (prop.pageState == 1) {
@@ -45,6 +61,16 @@ function PickXO(prop) {
                     x: `${pgWidth + 16}px`,
                     duration: 0,
                 });
+            };
+        } else if (
+            prop.pageState == 2 &&
+            !CSS.supports("aspect-ratio: 1 / 1")
+        ) {
+            bg = document.querySelector(".Stage2 main#Game > div:has(button)");
+            setPgWidth(bg.offsetWidth);
+            window.onresize = () => {
+                setPgWidth(bg.offsetWidth);
+                bg.style.height = pgWidth;
             };
         }
     }, [window.innerWidth]);
@@ -80,19 +106,7 @@ function PickXO(prop) {
                                         });
                                     }}
                                 >
-                                    <svg
-                                        width="64"
-                                        height="64"
-                                        className="X-icon"
-                                        viewBox="0 0 64 64"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <title>X icon</title>
-                                        <path
-                                            d="M15.002 1.147 32 18.145 48.998 1.147a3 3 0 0 1 4.243 0l9.612 9.612a3 3 0 0 1 0 4.243L45.855 32l16.998 16.998a3 3 0 0 1 0 4.243l-9.612 9.612a3 3 0 0 1-4.243 0L32 45.855 15.002 62.853a3 3 0 0 1-4.243 0L1.147 53.24a3 3 0 0 1 0-4.243L18.145 32 1.147 15.002a3 3 0 0 1 0-4.243l9.612-9.612a3 3 0 0 1 4.243 0Z"
-                                            fill="#1F3641"
-                                        />
-                                    </svg>
+                                    <XIcon hover={false} accent="m" />
                                     <span className="visually-hidden">
                                         pick X
                                     </span>
@@ -121,19 +135,7 @@ function PickXO(prop) {
                                         });
                                     }}
                                 >
-                                    <svg
-                                        width="64"
-                                        height="64"
-                                        className="O-icon"
-                                        viewBox="0 0 64 64"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <title>O icon</title>
-                                        <path
-                                            d="M32 0c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32C14.327 64 0 49.673 0 32 0 14.327 14.327 0 32 0Zm0 18.963c-7.2 0-13.037 5.837-13.037 13.037 0 7.2 5.837 13.037 13.037 13.037 7.2 0 13.037-5.837 13.037-13.037 0-7.2-5.837-13.037-13.037-13.037Z"
-                                            fill="#A8BFC9"
-                                        />
-                                    </svg>
+                                    <OIcon hover={false} accent="s" />
                                     <span className="visually-hidden">
                                         pick O
                                     </span>
@@ -146,10 +148,16 @@ function PickXO(prop) {
                 </>
             )}
             {prop.pageState == 2 &&
-                gameItems.map((ele) => {
+                gameItems.map((item) => {
                     return (
-                        <div key={ele.ItemInfo.id}>
-                            <GameItem />
+                        <div key={item.ItemInfo.id} style={{ height: pgWidth }}>
+                            <GameBoardItem
+                                handelClick={() => {
+                                    item.ItemInfo.player = prop.playWite;
+                                    gameResult(gameItems);
+                                }}
+                                player={item.ItemInfo.player}
+                            />
                         </div>
                     );
                 })}

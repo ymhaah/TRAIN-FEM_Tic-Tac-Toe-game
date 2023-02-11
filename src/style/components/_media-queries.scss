@@ -43,9 +43,9 @@
         .Container {
             --container-width: 90%;
         }
-        // .Container.Stage2 {
-        //     --container-width: 30%;
-        // }
+        .Container.Stage2 {
+            --container-width: 90%;
+        }
         // .Container.Stage3 {
         //     --container-width: 30%;
         // }
@@ -183,6 +183,7 @@
     .Stage2 {
         main#Game {
             > div:has(button) {
+                height: unset !important;
                 aspect-ratio: 1 / 1;
             }
         }

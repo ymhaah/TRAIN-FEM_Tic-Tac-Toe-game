@@ -2,7 +2,6 @@ import React from "react";
 import { gsap } from "gsap";
 import { Flip } from "gsap/Flip";
 import Button from "./uiComponents/Button";
-import GameResult from "./uiComponents/GameResult";
 
 gsap.registerPlugin(Flip);
 
@@ -36,6 +35,11 @@ function g_toStage2() {
 }
 
 function Footer(prop) {
+    /* 
+    todo: make the result system work, 
+    todo: change from cpu to player 2, 
+    todo: change form you to player1 and player2
+    */
     return (
         <footer>
             {prop.pageState == 1 && (
@@ -65,7 +69,22 @@ function Footer(prop) {
                 </>
             )}
 
-            {prop.pageState == 2 && <GameResult />}
+            {prop.pageState == 2 && (
+                <>
+                    <div className="accent-X-clr">
+                        <h3 className="p">X (you)</h3>
+                        <p className="fw-b fs-400">0</p>
+                    </div>
+                    <div className="accent-S-clr">
+                        <h3 className="p">ties</h3>
+                        <p className="fw-b fs-400">1</p>
+                    </div>
+                    <div className="accent-O-clr">
+                        <h3 className="p">O (cpu)</h3>
+                        <p className="fw-b fs-400">3</p>
+                    </div>
+                </>
+            )}
         </footer>
     );
 }

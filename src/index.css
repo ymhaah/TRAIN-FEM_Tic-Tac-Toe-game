@@ -30,7 +30,7 @@
   --accent-O-clr: var(--clr-gold-orange-800);
 }
 
-.App .Container main#Game .pickXO ul, .App .Container .main-header, .App .Stage2 .main-header, .App .Stage2 .main-header .header__turn, .App {
+.App .Container main#Game .pickXO ul, .App .Stage2 main#Game > div:has(button) button, .App .Container .main-header, .App .Stage2 .main-header, .App .Stage2 .main-header .header__turn, .App {
   display: flex;
 }
 
@@ -38,7 +38,7 @@
   flex-direction: row;
 }
 
-.App .Container main#Game .pickXO ul, .App .Container .main-header, .App {
+.App .Container main#Game .pickXO ul, .App .Stage2 main#Game > div:has(button) button, .App .Container .main-header, .App {
   justify-content: center;
 }
 
@@ -50,7 +50,7 @@
   justify-content: space-evenly;
 }
 
-.App .Container main#Game .pickXO ul, .App .Container .main-header, .App .Stage2 .main-header, .App .Stage2 .main-header .header__turn, .App {
+.App .Container main#Game .pickXO ul, .App .Stage2 main#Game > div:has(button) button, .App .Container .main-header, .App .Stage2 .main-header, .App .Stage2 .main-header .header__turn, .App {
   align-items: center;
 }
 
@@ -281,7 +281,6 @@ img,
 svg {
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
   display: block;
 }
@@ -289,7 +288,6 @@ svg {
 [type=button] {
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
   overflow: hidden;
   cursor: pointer;
@@ -371,7 +369,7 @@ svg {
   --accent-shadow-clr: var(--clr-blue-gray-300);
 }
 
-.result {
+#result-and-restart {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -479,6 +477,20 @@ svg {
   border-radius: var(--border-radius);
   background-color: var(--accent-clr);
 }
+.App .Stage2 main#Game > div:has(button) button svg {
+  width: 75%;
+  height: 75%;
+}
+.App .Stage2 main#Game > div:has(button) button[data-played=false] svg {
+  opacity: 0;
+  transition: opacity 100ms cubic-bezier(0.66, -0.2, 0.27, 1.15);
+}
+.App .Stage2 main#Game > div:has(button) button[data-played=false]:where(:hover, :active) svg {
+  opacity: 1;
+}
+.App .Stage2 main#Game > div:has(button) button[data-played=true]:has(svg, img) {
+  cursor: not-allowed;
+}
 
 .App .Stage2 footer {
   width: 100%;
@@ -514,11 +526,14 @@ svg {
   .App .Container {
     --container-width: 90%;
   }
+  .App .Container.Stage2 {
+    --container-width: 90%;
+  }
 }
 /*For tablets */
 @supports (overflow-x: clip) {
   html,
-body {
+  body {
     overflow-x: clip;
   }
 }
@@ -529,20 +544,18 @@ body {
 }
 @supports (aspect-ratio: 1/1) {
   .Stage2 main#Game > div:has(button) {
+    height: unset !important;
     aspect-ratio: 1/1;
   }
 }
 /* For people who have motion sickness. */
 @media (prefers-reduced-motion: reduce) {
   *,
-::before,
-::after {
-    -webkit-animation-delay: -1ms !important;
-            animation-delay: -1ms !important;
-    -webkit-animation-duration: 1ms !important;
-            animation-duration: 1ms !important;
-    -webkit-animation-iteration-count: 1 !important;
-            animation-iteration-count: 1 !important;
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
     background-attachment: initial !important;
     scroll-behavior: auto !important;
     transition-delay: 0s !important;
