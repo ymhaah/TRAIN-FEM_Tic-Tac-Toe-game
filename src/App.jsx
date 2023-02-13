@@ -8,7 +8,7 @@ import Result from "./components/resultAndRestartPage";
 console.log(`Made with Love by Youssef Hafnawi`);
 
 /*
-todo: we start with X to O and repeat
+todo: we start with X to O and repeat 
 todo: when click on the item the svg change to the solid v
 todo: update itemInfo.player when click and make it change once (maybe close click event)
 
@@ -20,6 +20,8 @@ todo: the result system
 todo: cpu
 
 */
+
+// for github
 
 function App() {
     const [pageState, setPageState] = useState(2);
