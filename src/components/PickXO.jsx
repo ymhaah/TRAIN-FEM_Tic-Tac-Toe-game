@@ -2,6 +2,7 @@ import React from "react";
 import { gsap } from "gsap";
 import playerFun from "../utils/player.js";
 import itemInfoFun from "../utils/itemInfo.js";
+import { setSpecialThings } from "../utils/function.js";
 import XIcon from "./uiComponents/XIcon.jsx";
 import OIcon from "./uiComponents/OIcon.jsx";
 
@@ -24,32 +25,13 @@ function gameSystem(cpu) {
 }
 
 let dimensions = 9;
-let gameItems = [];
-
-function GameBoardItem(prop) {
-    return (
-        <button
-            type="button"
-            className="focus accent-M-clr" // ! change the accent class when wining
-            title="click to play your turn"
-            data-played="true" // ! change this one when click
-            onClick={prop.handelClick}
-        >
-            <XIcon hover={false} accent="x" />{" "}
-            {/* // ! change the accent when wining */}
-            {/* <OIcon hover={true} accent="o" /> */}
-        </button>
-    );
-}
-for (let i = 0; i < dimensions; i++) {
-    gameItems.push({ item: <GameBoardItem /> });
-}
-itemInfoFun(gameItems);
-// console.log("gameItems", gameItems);
 
 function PickXO(prop) {
-    let [pgWidth, setPgWidth] = React.useState();
+    const [pgWidth, setPgWidth] = React.useState();
+    // const [played, setPlayed] = React.useState(false);
     let bg;
+
+    const [gameItems, setGameItem] = React.useState(itemInfoFun(dimensions));
 
     React.useEffect(() => {
         if (prop.pageState == 1) {
@@ -148,16 +130,39 @@ function PickXO(prop) {
                 </>
             )}
             {prop.pageState == 2 &&
-                gameItems.map((item) => {
+                gameItems.map((item, i) => {
                     return (
                         <div key={item.ItemInfo.id} style={{ height: pgWidth }}>
-                            <GameBoardItem
-                                handelClick={() => {
-                                    item.ItemInfo.player = prop.playWite;
-                                    gameResult(gameItems);
+                            <button
+                                type="button"
+                                className="focus gameItem accent-M-clr" // ! change the accent class when wining
+                                title="click to play your turn"
+                                data-played={item.ItemInfo.played} // ! change this one when click
+                                onClick={(e) => {
+                                    setGameItem((prevGameItems) => {
+                                        prevGameItems[i].ItemInfo.played = true;
+                                        prevGameItems[i].ItemInfo.player =
+                                            prop.playWite;
+                                        return [...prevGameItems];
+                                    });
+                                    prop.switchPlayer();
                                 }}
-                                player={item.ItemInfo.player}
-                            />
+                            >
+                                {item.ItemInfo.player ? (
+                                    <OIcon
+                                        hover={!item.ItemInfo.played}
+                                        accent="o"
+                                    />
+                                ) : (
+                                    <XIcon
+                                        hover={!item.ItemInfo.played}
+                                        accent="x"
+                                    />
+                                )}
+                                {/* // todo: change the accent when wining */}
+                                {/* // todo: make it hover correct */}
+                                {/* <OIcon hover={true} accent="o" /> */}
+                            </button>
                         </div>
                     );
                 })}

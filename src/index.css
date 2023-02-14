@@ -489,7 +489,7 @@ svg {
   opacity: 1;
 }
 .App .Stage2 main#Game > div:has(button) button[data-played=true]:has(svg, img) {
-  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .App .Stage2 footer {

@@ -9,8 +9,8 @@ console.log(`Made with Love by Youssef Hafnawi`);
 
 /*
 todo: we start with X to O and repeat 
-todo: when click on the item the svg change to the solid v
-todo: update itemInfo.player when click and make it change once (maybe close click event)
+// todo: when click on the item the svg change to the solid v
+// todo: update itemInfo.player when click and make it change once (maybe close click event)
 
 todo: the result system
     todo: the when we win system // ! you can use the wining colum idea (the 8 colum) or a function that use item location to know 
@@ -46,6 +46,9 @@ function App() {
         setPageState(3);
     }
 
+    function switchPlayer() {
+        setPlayWite(!playWite);
+    }
     return (
         <div className="App">
             <a
@@ -65,6 +68,7 @@ function App() {
                     pageState={pageState}
                     playerIS={playerIS}
                     playWite={playWite}
+                    switchPlayer={switchPlayer}
                 />
                 <Footer
                     pageState={pageState}

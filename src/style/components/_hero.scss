@@ -89,7 +89,7 @@
                     }
                 }
                 button[data-played="true"]:has(svg, img) {
-                    cursor: not-allowed;
+                    pointer-events: none;
                 }
             }
         }
