@@ -2,12 +2,16 @@ import React from "react";
 import { gsap } from "gsap";
 import playerFun from "../utils/player.js";
 import itemInfoFun from "../utils/itemInfo.js";
+import accentFun from "../utils/accentFun.js";
 import { setSpecialThings } from "../utils/function.js";
 import XIcon from "./uiComponents/XIcon.jsx";
 import OIcon from "./uiComponents/OIcon.jsx";
 
 let duration = 0.5;
 let delay = 0.1;
+
+// todo: make the wining system
+// todo: make a doc about how this work
 
 // playerFun(items, playerIndex, player)
 // itemInfoFun(items)
@@ -28,22 +32,71 @@ let dimensions = 9;
 
 function PickXO(prop) {
     const [pgWidth, setPgWidth] = React.useState();
-    // const [played, setPlayed] = React.useState(false);
     let bg;
 
     const [gameItems, setGameItem] = React.useState(itemInfoFun(dimensions));
+    // console.log("gameItems", gameItems);
 
+    function winingSystem() {
+        let playedArr = [];
+        let XArr = [];
+        let OArr = [];
+        // gameItems.forEach((item) => {
+        //     if (item.ItemInfo.played) {
+        //         playedArr.push(item);
+        //         playedArr.forEach((playedItem) => {
+        //             // console.log("playedItem", playedItem);
+
+        //             if (playedItem.ItemInfo.player) {
+        //                 OArr.push(playedItem.ItemInfo.location.y);
+
+        //                 // OArr.forEach((playedO)=>{
+        //                 //     if(){
+
+        //                 //     } else{
+        //                 //         OArr.length = 0;
+
+        //                 //     }
+        //                 // })
+        //             } else {
+        //                 XArr.push(playedItem.ItemInfo.location.x);
+
+        //                 // OArr.forEach((playedX)=>{
+        //                 //     if(){
+        //                 //     }else{
+        //                 //         XArr.length = 0;
+        //                 //     }
+        //                 // })
+        //             }
+        //         });
+        //         console.log(XArr);
+        //         console.log(OArr);
+        //     }
+        //     OArr.length = 0;
+        //     XArr.length = 0;
+        // });
+        //
+        // console.log(gameItems);
+    }
     React.useEffect(() => {
         if (prop.pageState == 1) {
             bg = document.querySelector(".bg");
             setPgWidth(bg.offsetWidth);
             window.onresize = () => {
                 setPgWidth(bg.offsetWidth);
-                gsap.to(bg, {
-                    x: `${pgWidth + 16}px`,
-                    duration: 0,
-                });
+                if (prop.playWite) {
+                    gsap.to(bg, {
+                        x: `${pgWidth + 16}px`,
+                        duration: 0,
+                    });
+                } else {
+                    gsap.to(bg, {
+                        x: 0,
+                        duration: 0,
+                    });
+                }
             };
+            // todo: fix the resize problem
         } else if (
             prop.pageState == 2 &&
             !CSS.supports("aspect-ratio: 1 / 1")
@@ -135,33 +188,57 @@ function PickXO(prop) {
                         <div key={item.ItemInfo.id} style={{ height: pgWidth }}>
                             <button
                                 type="button"
-                                className="focus gameItem accent-M-clr" // ! change the accent class when wining
+                                className={`focus gameItem ${
+                                    item.ItemInfo.wining
+                                        ? accentFun(!prop.playWite ? "o" : "x") // ! fix this
+                                        : accentFun("m")
+                                }`}
                                 title="click to play your turn"
-                                data-played={item.ItemInfo.played} // ! change this one when click
-                                onClick={(e) => {
+                                data-played={item.ItemInfo.played}
+                                onClick={() => {
                                     setGameItem((prevGameItems) => {
                                         prevGameItems[i].ItemInfo.played = true;
+                                        winingSystem();
                                         prevGameItems[i].ItemInfo.player =
                                             prop.playWite;
+
+                                        // console.log(
+                                        //     prevGameItems[i].ItemInfo.wining
+                                        // );
                                         return [...prevGameItems];
                                     });
                                     prop.switchPlayer();
                                 }}
                             >
-                                {item.ItemInfo.player ? (
-                                    <OIcon
-                                        hover={!item.ItemInfo.played}
-                                        accent="o"
-                                    />
-                                ) : (
-                                    <XIcon
-                                        hover={!item.ItemInfo.played}
-                                        accent="x"
-                                    />
-                                )}
+                                <div className="c">
+                                    {item.ItemInfo.played ? (
+                                        item.ItemInfo.player ? (
+                                            <OIcon
+                                                hover={false}
+                                                accent={
+                                                    item.ItemInfo.wining
+                                                        ? "m"
+                                                        : "o"
+                                                }
+                                            />
+                                        ) : (
+                                            <XIcon
+                                                hover={false}
+                                                accent={
+                                                    item.ItemInfo.wining
+                                                        ? "m"
+                                                        : "x"
+                                                }
+                                            />
+                                        )
+                                    ) : prop.playWite ? (
+                                        <OIcon hover={true} accent="o" />
+                                    ) : (
+                                        <XIcon hover={true} accent="x" />
+                                    )}
+                                </div>
+
                                 {/* // todo: change the accent when wining */}
-                                {/* // todo: make it hover correct */}
-                                {/* <OIcon hover={true} accent="o" /> */}
                             </button>
                         </div>
                     );

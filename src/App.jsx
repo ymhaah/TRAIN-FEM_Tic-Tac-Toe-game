@@ -24,7 +24,7 @@ todo: cpu
 // for github
 
 function App() {
-    const [pageState, setPageState] = useState(2);
+    const [pageState, setPageState] = useState(1);
 
     const [cpu, setCpu] = useState(false);
 

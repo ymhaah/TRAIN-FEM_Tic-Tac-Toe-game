@@ -8,11 +8,12 @@ function itemInfoFun(dimensions) {
         arr.push({});
     }
     class ItemInfo {
-        constructor(id, played, player, wining, x, y) {
+        constructor(id, played, player, wining, index, x, y) {
             this.id = id;
             this.played = played;
             this.player = player;
             this.location = {
+                index: index,
                 x: x,
                 y: y,
             };
@@ -20,8 +21,8 @@ function itemInfoFun(dimensions) {
         }
     }
 
-    arr.forEach((ele) => {
-        ele.ItemInfo = new ItemInfo(crypto.randomUUID(), false, null, false);
+    arr.forEach((ele, i) => {
+        ele.ItemInfo = new ItemInfo(crypto.randomUUID(), false, null, false, i);
     });
 
     for (let i = 0; i < Dimensions; i++) {
