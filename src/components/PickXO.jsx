@@ -1,6 +1,7 @@
 import React from "react";
 import { gsap } from "gsap";
 import playerFun from "../utils/player.js";
+import dimensionsFun from "../utils/dimensions.js";
 import itemInfoFun from "../utils/itemInfo.js";
 import accentFun from "../utils/accentFun.js";
 import { setSpecialThings } from "../utils/function.js";
@@ -38,45 +39,39 @@ function PickXO(prop) {
     // console.log("gameItems", gameItems);
 
     function winingSystem() {
-        let playedArr = [];
-        let XArr = [];
-        let OArr = [];
-        // gameItems.forEach((item) => {
-        //     if (item.ItemInfo.played) {
-        //         playedArr.push(item);
-        //         playedArr.forEach((playedItem) => {
-        //             // console.log("playedItem", playedItem);
-
-        //             if (playedItem.ItemInfo.player) {
-        //                 OArr.push(playedItem.ItemInfo.location.y);
-
-        //                 // OArr.forEach((playedO)=>{
-        //                 //     if(){
-
-        //                 //     } else{
-        //                 //         OArr.length = 0;
-
-        //                 //     }
-        //                 // })
-        //             } else {
-        //                 XArr.push(playedItem.ItemInfo.location.x);
-
-        //                 // OArr.forEach((playedX)=>{
-        //                 //     if(){
-        //                 //     }else{
-        //                 //         XArr.length = 0;
-        //                 //     }
-        //                 // })
-        //             }
-        //         });
-        //         console.log(XArr);
-        //         console.log(OArr);
+        // for (let i = 0; i < gameItems.length; i++) {
+        //     if (gameItems[i].ItemInfo.played) {
+        //         console.log(gameItems[i].ItemInfo.location.index);
         //     }
-        //     OArr.length = 0;
-        //     XArr.length = 0;
+        // }
+
+        // gameItems.forEach((item, i) => {
+        //     if (item.ItemInfo.played) {
+        //         if (
+        //             gameItems[i].ItemInfo.location.x ==
+        //             gameItems[i + 1].ItemInfo.location.x
+        //         ) {
+        //             let row = [
+        //                 gameItems[i].ItemInfo.location.index,
+        //                 gameItems[i + 1].ItemInfo.location.index,
+        //             ];
+
+        //             row.push(
+        //                 gameItems[i].ItemInfo.location.index,
+        //                 gameItems[i + 1].ItemInfo.location.index
+        //             );
+        //             console.log("row", row);
+        //             let rowSet = new Set(row);
+        //             // if (
+        //             //     rowSet.size == 1 &&
+        //             //     row.length == dimensionsFun(dimensions)
+        //             // ) {
+        //             //     console.log("rowSet", rowSet);
+        //             // }
+        //         }
+        //     }
         // });
-        //
-        // console.log(gameItems);
+        console.log(gameItems);
     }
     React.useEffect(() => {
         if (prop.pageState == 1) {
@@ -198,15 +193,12 @@ function PickXO(prop) {
                                 onClick={() => {
                                     setGameItem((prevGameItems) => {
                                         prevGameItems[i].ItemInfo.played = true;
-                                        winingSystem();
                                         prevGameItems[i].ItemInfo.player =
                                             prop.playWite;
-
-                                        // console.log(
-                                        //     prevGameItems[i].ItemInfo.wining
-                                        // );
+                                        winingSystem();
                                         return [...prevGameItems];
                                     });
+
                                     prop.switchPlayer();
                                 }}
                             >
