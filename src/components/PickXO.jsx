@@ -30,6 +30,7 @@ function gameSystem(cpu) {
 }
 
 let dimensions = 9;
+let Dim = dimensionsFun(dimensions);
 
 function PickXO(prop) {
     const [pgWidth, setPgWidth] = React.useState();
@@ -39,39 +40,89 @@ function PickXO(prop) {
     // console.log("gameItems", gameItems);
 
     function winingSystem() {
-        // for (let i = 0; i < gameItems.length; i++) {
-        //     if (gameItems[i].ItemInfo.played) {
-        //         console.log(gameItems[i].ItemInfo.location.index);
-        //     }
-        // }
-
-        // gameItems.forEach((item, i) => {
-        //     if (item.ItemInfo.played) {
-        //         if (
-        //             gameItems[i].ItemInfo.location.x ==
-        //             gameItems[i + 1].ItemInfo.location.x
-        //         ) {
-        //             let row = [
-        //                 gameItems[i].ItemInfo.location.index,
-        //                 gameItems[i + 1].ItemInfo.location.index,
-        //             ];
-
-        //             row.push(
-        //                 gameItems[i].ItemInfo.location.index,
-        //                 gameItems[i + 1].ItemInfo.location.index
-        //             );
-        //             console.log("row", row);
-        //             let rowSet = new Set(row);
-        //             // if (
-        //             //     rowSet.size == 1 &&
-        //             //     row.length == dimensionsFun(dimensions)
-        //             // ) {
-        //             //     console.log("rowSet", rowSet);
-        //             // }
-        //         }
+        // gameItems.forEach((item) => {
+        //     if (
+        //         item.ItemInfo.location.x + item.ItemInfo.location.y ==
+        //             Dim + 1 ||
+        //         item.ItemInfo.location.x - item.ItemInfo.location.y == 0
+        //     ) {
+        //         // console.log(item.ItemInfo.location);
         //     }
         // });
-        console.log(gameItems);
+        for (let i = 0; i < Dim; i++) {
+            let item = i;
+            let winnerCallX = [0, []];
+            let winnerCallO = [0, []];
+
+            for (item; item < dimensions; item = item + Dim) {
+                if (gameItems[item].ItemInfo.player == false) {
+                    winnerCallX[0]++;
+                    winnerCallX[1].push(gameItems[item]);
+                    if (winnerCallX[0] == Dim) {
+                        setSpecialThings(
+                            winnerCallX[1],
+                            gameItems,
+                            (i) => {
+                                setGameItem((prevGameItems) => {
+                                    prevGameItems[
+                                        i.ItemInfo.location.index
+                                    ].ItemInfo.wining = true;
+                                    return [...prevGameItems];
+                                });
+                            },
+                            (i) => {
+                                setGameItem((prevGameItems) => {
+                                    prevGameItems[
+                                        i.ItemInfo.location.index
+                                    ].ItemInfo.wining = false;
+                                    return [...prevGameItems];
+                                });
+                            }
+                        );
+                        winnerCallX[1].length = 0;
+                        break;
+                    }
+                }
+                if (gameItems[item].ItemInfo.player == true) {
+                    winnerCallO[0]++;
+                    winnerCallO[1].push(gameItems[item]);
+                    if (winnerCallO[0] == Dim) {
+                        setSpecialThings(
+                            winnerCallO[1],
+                            gameItems,
+                            (i) => {
+                                setGameItem((prevGameItems) => {
+                                    prevGameItems[
+                                        i.ItemInfo.location.index
+                                    ].ItemInfo.wining = true;
+                                    return [...prevGameItems];
+                                });
+                            },
+                            (i) => {
+                                setGameItem((prevGameItems) => {
+                                    prevGameItems[
+                                        i.ItemInfo.location.index
+                                    ].ItemInfo.wining = false;
+                                    return [...prevGameItems];
+                                });
+                            }
+                        );
+                        winnerCallO[1].length = 0;
+                        break;
+                    }
+                }
+            }
+        }
+
+        for (let i = 0; i < dimensions; i = i * Dim) {
+            let item = i;
+            let winnerRowX = [0, []];
+            let winnerRowO = [0, []];
+            for (item; item < Dim + i; item++) {
+                console.log(item);
+            }
+        }
+        // console.log(gameItems);
     }
     React.useEffect(() => {
         if (prop.pageState == 1) {
@@ -185,7 +236,9 @@ function PickXO(prop) {
                                 type="button"
                                 className={`focus gameItem ${
                                     item.ItemInfo.wining
-                                        ? accentFun(!prop.playWite ? "o" : "x") // ! fix this
+                                        ? accentFun(
+                                              item.ItemInfo.player ? "o" : "x"
+                                          )
                                         : accentFun("m")
                                 }`}
                                 title="click to play your turn"
@@ -229,8 +282,6 @@ function PickXO(prop) {
                                         <XIcon hover={true} accent="x" />
                                     )}
                                 </div>
-
-                                {/* // todo: change the accent when wining */}
                             </button>
                         </div>
                     );

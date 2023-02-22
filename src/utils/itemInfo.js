@@ -36,7 +36,7 @@ function itemInfoFun(dimensions) {
     for (let i = 0; i < Dimensions; i++) {
         let item = i;
         for (item; item < dimensions; item = item + Dimensions) {
-            arr[item].ItemInfo.location.y = i + 1;
+            arr[item].ItemInfo.location.y = i++;
         }
     }
 
