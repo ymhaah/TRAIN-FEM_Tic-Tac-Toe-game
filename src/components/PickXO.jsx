@@ -11,23 +11,9 @@ import OIcon from "./uiComponents/OIcon.jsx";
 let duration = 0.5;
 let delay = 0.1;
 
-// todo: make the wining system
 // todo: make a doc about how this work
 
-// playerFun(items, playerIndex, player)
-// itemInfoFun(items)
-
-// for github
-
-function gameResult(gameItems) {}
-
-function gameSystem(cpu) {
-    if (cpu) {
-        // ! play with cpu, so make the cpu system
-    } else {
-        // ! play with another player, so see how win
-    }
-}
+// ! fix the updatePageState error
 
 let dimensions = 9;
 let Dim = dimensionsFun(dimensions);
@@ -37,30 +23,175 @@ function PickXO(prop) {
     let bg;
 
     const [gameItems, setGameItem] = React.useState(itemInfoFun(dimensions));
-    // console.log("gameItems", gameItems);
 
+    function announceWinner(result) {
+        React.useEffect(() => {
+            prop.updatePageState(3);
+        }, [winingSystem()]);
+    }
+
+    //! if winingSystem return true => O wines, false => X wines, null => draw
+    //! winingSystem change the wining items state by itself
     function winingSystem() {
-        // gameItems.forEach((item) => {
-        //     if (
-        //         item.ItemInfo.location.x + item.ItemInfo.location.y ==
-        //             Dim + 1 ||
-        //         item.ItemInfo.location.x - item.ItemInfo.location.y == 0
-        //     ) {
-        //         // console.log(item.ItemInfo.location);
-        //     }
-        // });
+        // for diagonals
+        let diagonals = [[], []];
+        // * diagonals[0] for the first diagonal diagonals[1] for the second diagonal
+        for (let i = 0; i < dimensions; i++) {
+            if (
+                gameItems[i].ItemInfo.location.x +
+                    gameItems[i].ItemInfo.location.y ==
+                    Dim + 1 ||
+                gameItems[i].ItemInfo.location.x -
+                    gameItems[i].ItemInfo.location.y ==
+                    0
+            ) {
+                if (
+                    gameItems[i].ItemInfo.location.x ==
+                    gameItems[i].ItemInfo.location.y
+                ) {
+                    diagonals[0].push(gameItems[i]);
+                    if (diagonals[0].length == Dim) {
+                        if (
+                            diagonals[0].every(
+                                (ele) => ele.ItemInfo.player == false
+                            )
+                        ) {
+                            setSpecialThings(
+                                diagonals[0],
+                                gameItems,
+                                (i) => {
+                                    setGameItem((prevGameItems) => {
+                                        prevGameItems[
+                                            i.ItemInfo.location.index
+                                        ].ItemInfo.wining = true;
+                                        return [...prevGameItems];
+                                    });
+                                },
+                                (i) => {
+                                    setGameItem((prevGameItems) => {
+                                        prevGameItems[
+                                            i.ItemInfo.location.index
+                                        ].ItemInfo.wining = false;
+                                        return [...prevGameItems];
+                                    });
+                                }
+                            );
+                            announceWinner(false);
+                            return false;
+                        }
+                        if (
+                            diagonals[0].every(
+                                (ele) => ele.ItemInfo.player == true
+                            )
+                        ) {
+                            setSpecialThings(
+                                diagonals[0],
+                                gameItems,
+                                (i) => {
+                                    setGameItem((prevGameItems) => {
+                                        prevGameItems[
+                                            i.ItemInfo.location.index
+                                        ].ItemInfo.wining = true;
+                                        return [...prevGameItems];
+                                    });
+                                },
+                                (i) => {
+                                    setGameItem((prevGameItems) => {
+                                        prevGameItems[
+                                            i.ItemInfo.location.index
+                                        ].ItemInfo.wining = false;
+                                        return [...prevGameItems];
+                                    });
+                                }
+                            );
+                            announceWinner(true);
+                            return true;
+                        }
+                    }
+                }
+                if (
+                    gameItems[i].ItemInfo.location.x !=
+                        gameItems[i].ItemInfo.location.y ||
+                    gameItems[i].ItemInfo.location.x +
+                        gameItems[i].ItemInfo.location.y ==
+                        Dim + 1
+                ) {
+                    diagonals[1].push(gameItems[i]);
+                    if (diagonals[1].length == Dim) {
+                        if (
+                            diagonals[1].every(
+                                (ele) => ele.ItemInfo.player == false
+                            )
+                        ) {
+                            setSpecialThings(
+                                diagonals[1],
+                                gameItems,
+                                (i) => {
+                                    setGameItem((prevGameItems) => {
+                                        prevGameItems[
+                                            i.ItemInfo.location.index
+                                        ].ItemInfo.wining = true;
+                                        return [...prevGameItems];
+                                    });
+                                },
+                                (i) => {
+                                    setGameItem((prevGameItems) => {
+                                        prevGameItems[
+                                            i.ItemInfo.location.index
+                                        ].ItemInfo.wining = false;
+                                        return [...prevGameItems];
+                                    });
+                                }
+                            );
+                            announceWinner(false);
+                            return false;
+                        }
+                        if (
+                            diagonals[1].every(
+                                (ele) => ele.ItemInfo.player == true
+                            )
+                        ) {
+                            setSpecialThings(
+                                diagonals[1],
+                                gameItems,
+                                (i) => {
+                                    setGameItem((prevGameItems) => {
+                                        prevGameItems[
+                                            i.ItemInfo.location.index
+                                        ].ItemInfo.wining = true;
+                                        return [...prevGameItems];
+                                    });
+                                },
+                                (i) => {
+                                    setGameItem((prevGameItems) => {
+                                        prevGameItems[
+                                            i.ItemInfo.location.index
+                                        ].ItemInfo.wining = false;
+                                        return [...prevGameItems];
+                                    });
+                                }
+                            );
+                            announceWinner(true);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        // for column
         for (let i = 0; i < Dim; i++) {
             let item = i;
-            let winnerCallX = [0, []];
-            let winnerCallO = [0, []];
+            let winnerColX = [];
+            let winnerColO = [];
 
             for (item; item < dimensions; item = item + Dim) {
                 if (gameItems[item].ItemInfo.player == false) {
-                    winnerCallX[0]++;
-                    winnerCallX[1].push(gameItems[item]);
-                    if (winnerCallX[0] == Dim) {
+                    // if X wins in a column
+                    winnerColX.push(gameItems[item]);
+                    if (winnerColX.length == Dim) {
                         setSpecialThings(
-                            winnerCallX[1],
+                            winnerColX,
                             gameItems,
                             (i) => {
                                 setGameItem((prevGameItems) => {
@@ -79,16 +210,16 @@ function PickXO(prop) {
                                 });
                             }
                         );
-                        winnerCallX[1].length = 0;
-                        break;
+                        announceWinner(false);
+                        return false;
                     }
                 }
                 if (gameItems[item].ItemInfo.player == true) {
-                    winnerCallO[0]++;
-                    winnerCallO[1].push(gameItems[item]);
-                    if (winnerCallO[0] == Dim) {
+                    // if O wins in a column
+                    winnerColO.push(gameItems[item]);
+                    if (winnerColO.length == Dim) {
                         setSpecialThings(
-                            winnerCallO[1],
+                            winnerColO,
                             gameItems,
                             (i) => {
                                 setGameItem((prevGameItems) => {
@@ -107,22 +238,89 @@ function PickXO(prop) {
                                 });
                             }
                         );
-                        winnerCallO[1].length = 0;
-                        break;
+                        announceWinner(true);
+                        return true;
                     }
                 }
             }
         }
 
-        for (let i = 0; i < dimensions; i = i * Dim) {
-            let item = i;
-            let winnerRowX = [0, []];
-            let winnerRowO = [0, []];
-            for (item; item < Dim + i; item++) {
-                console.log(item);
+        // for rows
+        for (let i = 0; i < dimensions; i = i + 3) {
+            let start = i;
+            let end = i + Dim;
+            let winnerRowX = [];
+            let winnerRowO = [];
+            for (start; start < end; start++) {
+                if (gameItems[start].ItemInfo.player == false) {
+                    // if X wins in a row
+                    winnerRowX.push(gameItems[start]);
+                    if (winnerRowX.length == Dim) {
+                        setSpecialThings(
+                            winnerRowX,
+                            gameItems,
+                            (i) => {
+                                setGameItem((prevGameItems) => {
+                                    prevGameItems[
+                                        i.ItemInfo.location.index
+                                    ].ItemInfo.wining = true;
+                                    return [...prevGameItems];
+                                });
+                            },
+                            (i) => {
+                                setGameItem((prevGameItems) => {
+                                    prevGameItems[
+                                        i.ItemInfo.location.index
+                                    ].ItemInfo.wining = false;
+                                    return [...prevGameItems];
+                                });
+                            }
+                        );
+                        announceWinner(false);
+                        return false;
+                    }
+                }
+                if (gameItems[start].ItemInfo.player == true) {
+                    // if O wins in a row
+                    winnerRowO.push(gameItems[start]);
+                    if (winnerRowO.length == Dim) {
+                        setSpecialThings(
+                            winnerRowO,
+                            gameItems,
+                            (i) => {
+                                setGameItem((prevGameItems) => {
+                                    prevGameItems[
+                                        i.ItemInfo.location.index
+                                    ].ItemInfo.wining = true;
+                                    return [...prevGameItems];
+                                });
+                            },
+                            (i) => {
+                                setGameItem((prevGameItems) => {
+                                    prevGameItems[
+                                        i.ItemInfo.location.index
+                                    ].ItemInfo.wining = false;
+                                    return [...prevGameItems];
+                                });
+                            }
+                        );
+                        announceWinner(true);
+                        return true;
+                    }
+                }
             }
         }
-        // console.log(gameItems);
+
+        // if draw
+        let draw = gameItems.every((item) => {
+            return (
+                item.ItemInfo.played == true && item.ItemInfo.wining == false
+            );
+        });
+        if (draw) {
+            announceWinner(null);
+            return null;
+        }
     }
     React.useEffect(() => {
         if (prop.pageState == 1) {
@@ -251,7 +449,6 @@ function PickXO(prop) {
                                         winingSystem();
                                         return [...prevGameItems];
                                     });
-
                                     prop.switchPlayer();
                                 }}
                             >

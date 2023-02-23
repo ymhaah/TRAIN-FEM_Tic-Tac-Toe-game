@@ -69,6 +69,7 @@ function App() {
                     playerIS={playerIS}
                     playWite={playWite}
                     switchPlayer={switchPlayer}
+                    updatePageState={updatePageState}
                 />
                 <Footer
                     pageState={pageState}
