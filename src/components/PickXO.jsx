@@ -13,7 +13,10 @@ let delay = 0.1;
 
 // todo: make a doc about how this work
 
-// ! fix the updatePageState error
+// ! how to fix the error:
+//? 1- remove the return
+//? 2- make the winingSystem fun outside pickXO
+//? 3- make the result stage pase on gameItem state
 
 let dimensions = 9;
 let Dim = dimensionsFun(dimensions);
@@ -23,12 +26,11 @@ function PickXO(prop) {
     let bg;
 
     const [gameItems, setGameItem] = React.useState(itemInfoFun(dimensions));
+    const [results, setResults] = React.useState();
 
-    function announceWinner(result) {
-        React.useEffect(() => {
-            prop.updatePageState(3);
-        }, [winingSystem()]);
-    }
+    React.useEffect(() => {
+        console.log(winingSystem());
+    }, [winingSystem()]);
 
     //! if winingSystem return true => O wines, false => X wines, null => draw
     //! winingSystem change the wining items state by itself
@@ -67,16 +69,9 @@ function PickXO(prop) {
                                         return [...prevGameItems];
                                     });
                                 },
-                                (i) => {
-                                    setGameItem((prevGameItems) => {
-                                        prevGameItems[
-                                            i.ItemInfo.location.index
-                                        ].ItemInfo.wining = false;
-                                        return [...prevGameItems];
-                                    });
-                                }
+                                () => {}
                             );
-                            announceWinner(false);
+
                             return false;
                         }
                         if (
@@ -95,16 +90,9 @@ function PickXO(prop) {
                                         return [...prevGameItems];
                                     });
                                 },
-                                (i) => {
-                                    setGameItem((prevGameItems) => {
-                                        prevGameItems[
-                                            i.ItemInfo.location.index
-                                        ].ItemInfo.wining = false;
-                                        return [...prevGameItems];
-                                    });
-                                }
+                                (i) => {}
                             );
-                            announceWinner(true);
+
                             return true;
                         }
                     }
@@ -134,16 +122,9 @@ function PickXO(prop) {
                                         return [...prevGameItems];
                                     });
                                 },
-                                (i) => {
-                                    setGameItem((prevGameItems) => {
-                                        prevGameItems[
-                                            i.ItemInfo.location.index
-                                        ].ItemInfo.wining = false;
-                                        return [...prevGameItems];
-                                    });
-                                }
+                                (i) => {}
                             );
-                            announceWinner(false);
+
                             return false;
                         }
                         if (
@@ -162,16 +143,9 @@ function PickXO(prop) {
                                         return [...prevGameItems];
                                     });
                                 },
-                                (i) => {
-                                    setGameItem((prevGameItems) => {
-                                        prevGameItems[
-                                            i.ItemInfo.location.index
-                                        ].ItemInfo.wining = false;
-                                        return [...prevGameItems];
-                                    });
-                                }
+                                (i) => {}
                             );
-                            announceWinner(true);
+
                             return true;
                         }
                     }
@@ -201,16 +175,9 @@ function PickXO(prop) {
                                     return [...prevGameItems];
                                 });
                             },
-                            (i) => {
-                                setGameItem((prevGameItems) => {
-                                    prevGameItems[
-                                        i.ItemInfo.location.index
-                                    ].ItemInfo.wining = false;
-                                    return [...prevGameItems];
-                                });
-                            }
+                            (i) => {}
                         );
-                        announceWinner(false);
+
                         return false;
                     }
                 }
@@ -229,16 +196,8 @@ function PickXO(prop) {
                                     return [...prevGameItems];
                                 });
                             },
-                            (i) => {
-                                setGameItem((prevGameItems) => {
-                                    prevGameItems[
-                                        i.ItemInfo.location.index
-                                    ].ItemInfo.wining = false;
-                                    return [...prevGameItems];
-                                });
-                            }
+                            (i) => {}
                         );
-                        announceWinner(true);
                         return true;
                     }
                 }
@@ -267,16 +226,9 @@ function PickXO(prop) {
                                     return [...prevGameItems];
                                 });
                             },
-                            (i) => {
-                                setGameItem((prevGameItems) => {
-                                    prevGameItems[
-                                        i.ItemInfo.location.index
-                                    ].ItemInfo.wining = false;
-                                    return [...prevGameItems];
-                                });
-                            }
+                            (i) => {}
                         );
-                        announceWinner(false);
+
                         return false;
                     }
                 }
@@ -295,16 +247,9 @@ function PickXO(prop) {
                                     return [...prevGameItems];
                                 });
                             },
-                            (i) => {
-                                setGameItem((prevGameItems) => {
-                                    prevGameItems[
-                                        i.ItemInfo.location.index
-                                    ].ItemInfo.wining = false;
-                                    return [...prevGameItems];
-                                });
-                            }
+                            (i) => {}
                         );
-                        announceWinner(true);
+
                         return true;
                     }
                 }
@@ -318,10 +263,10 @@ function PickXO(prop) {
             );
         });
         if (draw) {
-            announceWinner(null);
             return null;
         }
     }
+
     React.useEffect(() => {
         if (prop.pageState == 1) {
             bg = document.querySelector(".bg");
@@ -446,7 +391,9 @@ function PickXO(prop) {
                                         prevGameItems[i].ItemInfo.played = true;
                                         prevGameItems[i].ItemInfo.player =
                                             prop.playWite;
-                                        winingSystem();
+                                        () => {
+                                            winingSystem();
+                                        };
                                         return [...prevGameItems];
                                     });
                                     prop.switchPlayer();
@@ -483,6 +430,19 @@ function PickXO(prop) {
                         </div>
                     );
                 })}
+            {results === false && (
+                <div id="result-and-restart">
+                    <p>Lorem ipsum dolor sit.</p>
+                    <h1>Lorem ipsum dolor sit</h1>
+                    <Button
+                        accent="x"
+                        pageState={pageState}
+                        handelClick={function () {
+                            console.log("test");
+                        }}
+                    />
+                </div>
+            )}
         </main>
     );
 }
