@@ -33,7 +33,7 @@ function Header(prop) {
             {prop.pageState == 2 && (
                 <>
                     <div className="header__turn">
-                        {prop.playWite == false ? (
+                        {prop.currentPlayer === false ? (
                             <>
                                 <XIcon hover={false} accent="s" />
                                 <h2 className="p fw-b">
@@ -55,6 +55,7 @@ function Header(prop) {
                         pageState="2"
                         accent="s"
                         handelClick={() => {
+                            prop.updatePageState(3);
                             prop.isRestart();
                         }}
                     />

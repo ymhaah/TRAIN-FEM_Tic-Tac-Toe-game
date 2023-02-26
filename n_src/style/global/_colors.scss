@@ -1,0 +1,41 @@
+:root {
+    // * ### teal blue ###
+    --clr-teal-blue-500: hsl(178, 75%, 65%); // * X button shadow
+    --clr-teal-blue-700: hsl(178, 60%, 48%); // * X accent color (button, text)
+
+    // * ### gold orange ###
+    --clr-gold-orange-600: hsl(39, 100%, 69%); // * O button shadow
+    --clr-gold-orange-800: hsl(39, 88%, 58%); // * O accent color (button, text)
+
+    // * ### dark teal ###
+    --clr-dark-teal-600: hsl(200, 35%, 20%); // * game item background color
+    --clr-dark-teal-700: hsl(199, 30%, 15%); // * main background color
+    --clr-dark-teal-800: hsl(
+        198,
+        45%,
+        10%
+    ); // * game item shadow color, button text color
+
+    // * ### light gray ###
+    --clr-ice-blue-200: hsl(
+        200,
+        25%,
+        75%
+    ); // * text color, secondary button color
+    --clr-blue-gray-300: hsl(200, 20%, 50%); // * secondary button shadow color
+
+    // * alpha
+    --clr-alpha-black: 0 0% 0%;
+    --clr-alpha-white: 0 0% 100%;
+    --clr-alpha-ice-blue-200: 200 25% 75%;
+    --clr-alpha-blue-gray-300: 200 20% 50%;
+    --clr-alpha-dark-teal-800: 198 45% 10%;
+
+    // main
+    --bg-clr: var(--clr-dark-teal-700);
+    --bg-item-clr: var(--clr-dark-teal-600);
+    --txt-clr: hsla(var(--clr-alpha-ice-blue-200) / 0.9);
+    --accent-text-clr: hsla(var(--clr-alpha-dark-teal-800) / 0.9);
+    --accent-X-clr: var(--clr-teal-blue-700);
+    --accent-O-clr: var(--clr-gold-orange-800);
+}

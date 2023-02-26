@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./index.css";
+// import "./index.css";
 import Header from "./components/Header";
 import PickXO from "./components/PickXO";
 import Footer from "./components/Footer";
@@ -24,13 +24,17 @@ todo: cpu
 // for github
 
 function App() {
-    const [pageState, setPageState] = useState(2);
+    const [pageState, setPageState] = useState(1);
 
     const [cpu, setCpu] = useState(false);
 
     const [playWite, setPlayWite] = useState(false); // ! true =  O , false = X
 
     const [restart, setRestart] = useState(false);
+    const [resultState, setResultAndRestart] = useState({
+        restart: false,
+        result: "",
+    });
 
     function updatePageState(state) {
         setPageState(state);
@@ -49,6 +53,11 @@ function App() {
     function switchPlayer() {
         setPlayWite(!playWite);
     }
+
+    function resultAndRestart(result) {
+        console.log(result);
+    }
+
     return (
         <div className="App">
             <a
@@ -70,6 +79,7 @@ function App() {
                     playWite={playWite}
                     switchPlayer={switchPlayer}
                     updatePageState={updatePageState}
+                    resultAndRestart={resultAndRestart}
                 />
                 <Footer
                     pageState={pageState}
@@ -77,7 +87,7 @@ function App() {
                     playWithCpu={playWithCpu}
                 />
             </div>
-            {pageState == 3 && <Result />}
+            {/* {pageState == 3 && <Result />} */}
             {/* // * finish his state */}
         </div>
     );
