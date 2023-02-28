@@ -19,7 +19,6 @@
                 height: var(--Header-hight);
                 a {
                     cursor: pointer;
-                    white-space: nowrap;
                     svg {
                         width: var(--Header-icon-hight);
                     }
@@ -27,7 +26,8 @@
             }
         }
     }
-    .Stage2 {
+    .Stage2,
+    .Stage3 {
         .main-header {
             @include flex(n, sb, c);
             .header__turn {

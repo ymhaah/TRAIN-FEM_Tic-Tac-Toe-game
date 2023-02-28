@@ -22,8 +22,8 @@ function g_toStage2() {
         x: "-100%",
         opacity: 0,
     });
-    let logo = document.querySelector(".header__Logo");
-    let g_logo = Flip.getState(logo);
+    // let logo = document.querySelector(".header__Logo");
+    // let g_logo = Flip.getState(logo);
 
     // Flip.to(g_logo, {
     //     duration: duration,
@@ -35,11 +35,6 @@ function g_toStage2() {
 }
 
 function Footer(prop) {
-    /* 
-    todo: make the result system work, 
-    todo: change from cpu to player 2, 
-    todo: change form you to player1 and player2
-    */
     return (
         <footer>
             {prop.pageState == 1 && (
@@ -48,7 +43,6 @@ function Footer(prop) {
                         pageState="1"
                         accent="o"
                         handelClick={function () {
-                            prop.playWithCpu(false);
                             g_toStage2();
                             setTimeout(() => {
                                 prop.updatePageState(2);
@@ -59,7 +53,7 @@ function Footer(prop) {
                         pageState="1"
                         accent="x"
                         handelClick={function () {
-                            prop.playWithCpu(true);
+                            prop.playWithCpu();
                             g_toStage2();
                             setTimeout(() => {
                                 prop.updatePageState(2);
@@ -72,16 +66,36 @@ function Footer(prop) {
             {prop.pageState == 2 && (
                 <>
                     <div className="accent-X-clr">
-                        <h3 className="p">X (you)</h3>
-                        <p className="fw-b fs-400">0</p>
+                        <h3 className="p">
+                            X (
+                            {prop.players.cpu.playingWith &&
+                            prop.players.cpu.cpuPlayer === false
+                                ? "cpu"
+                                : prop.players.cpu.playingWith &&
+                                  prop.players.cpu.cpuPlayer === true
+                                ? "you"
+                                : !prop.players.cpu.playingWith && "player1"}
+                            )
+                        </h3>
+                        <p className="fw-b fs-400">{prop.history.xWins}</p>
                     </div>
                     <div className="accent-S-clr">
                         <h3 className="p">ties</h3>
-                        <p className="fw-b fs-400">1</p>
+                        <p className="fw-b fs-400">{prop.history.draw}</p>
                     </div>
                     <div className="accent-O-clr">
-                        <h3 className="p">O (cpu)</h3>
-                        <p className="fw-b fs-400">3</p>
+                        <h3 className="p">
+                            O (
+                            {prop.players.cpu.playingWith &&
+                            prop.players.cpu.cpuPlayer === true
+                                ? "cpu"
+                                : prop.players.cpu.playingWith &&
+                                  prop.players.cpu.cpuPlayer === false
+                                ? "you"
+                                : !prop.players.cpu.playingWith && "player2"}
+                            )
+                        </h3>
+                        <p className="fw-b fs-400">{prop.history.oWins}</p>
                     </div>
                 </>
             )}

@@ -30,7 +30,7 @@ function Header(prop) {
                     <span className="visually-hidden"> my logo </span>
                 </a>
             </div>
-            {prop.pageState == 2 && (
+            {prop.pageState >= 2 && (
                 <>
                     <div className="header__turn">
                         {prop.currentPlayer === false ? (
@@ -55,7 +55,6 @@ function Header(prop) {
                         pageState="2"
                         accent="s"
                         handelClick={() => {
-                            prop.updatePageState(3);
                             prop.isRestart();
                         }}
                     />

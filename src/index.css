@@ -545,9 +545,9 @@ svg {
     overflow-x: clip;
   }
 }
-@supports (height: 100dvh) {
+@supports (height: 100svh) {
   #root {
-    height: 100dvh;
+    height: 100svh;
   }
 }
 @supports (aspect-ratio: 1/1) {

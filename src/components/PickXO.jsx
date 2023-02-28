@@ -280,7 +280,7 @@ function PickXO(prop) {
             };
             // todo: fix the resize problem
         }
-    }, [window.innerWidth, prop.playWite]);
+    }, [window.innerWidth, prop.currentPlayer]);
 
     React.useEffect(() => {
         if (prop.pageState == 2 && !CSS.supports("aspect-ratio: 1 / 1")) {
