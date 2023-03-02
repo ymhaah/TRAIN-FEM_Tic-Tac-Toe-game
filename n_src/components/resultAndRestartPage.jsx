@@ -23,6 +23,7 @@ function Result(prop) {
                         restart={true}
                         handelClick={() => {
                             prop.updatePageState(1);
+                            prop.quit();
                         }}
                     />
                 </div>
@@ -34,6 +35,7 @@ function Result(prop) {
                         pageState={3}
                         handelClick={() => {
                             prop.updatePageState(1);
+                            prop.quit();
                         }}
                     />
                     <Button
@@ -41,6 +43,7 @@ function Result(prop) {
                         pageState={3}
                         handelClick={() => {
                             prop.updatePageState(2);
+                            prop.nextRound();
                         }}
                     />
                 </div>
@@ -64,6 +67,7 @@ function Result(prop) {
                         pageState={3}
                         handelClick={() => {
                             prop.updatePageState(1);
+                            prop.quit();
                         }}
                     />
                     <Button
@@ -71,6 +75,7 @@ function Result(prop) {
                         pageState={3}
                         handelClick={() => {
                             prop.updatePageState(2);
+                            prop.nextRound();
                         }}
                     />
                 </div>
@@ -93,6 +98,7 @@ function Result(prop) {
                         pageState={3}
                         handelClick={() => {
                             prop.updatePageState(1);
+                            prop.quit();
                         }}
                     />
                     <Button
@@ -100,6 +106,7 @@ function Result(prop) {
                         pageState={3}
                         handelClick={() => {
                             prop.updatePageState(2);
+                            prop.nextRound();
                         }}
                     />
                 </div>

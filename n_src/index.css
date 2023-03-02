@@ -30,8 +30,8 @@
   --accent-O-clr: var(--clr-gold-orange-800);
 }
 
-.App .Container main#Game .pickXO ul, .App .Stage2 main#Game > div:has(button) button,
-.App .Stage3 main#Game > div:has(button) button, .App .Container .main-header, .App .Stage2 .main-header,
+.App .Container main#Game .pickXO ul, .App .Stage2 main#Game > div:has(button) .gameItem,
+.App .Stage3 main#Game > div:has(button) .gameItem, .App .Container .main-header, .App .Stage2 .main-header,
 .App .Stage3 .main-header, .App .Stage2 .main-header .header__turn,
 .App .Stage3 .main-header .header__turn, .App, #result-and-restart, #result-and-restart .result:has(p) .e {
   display: flex;
@@ -42,8 +42,8 @@
   flex-direction: row;
 }
 
-.App .Container main#Game .pickXO ul, .App .Stage2 main#Game > div:has(button) button,
-.App .Stage3 main#Game > div:has(button) button, .App .Container .main-header, .App, #result-and-restart, #result-and-restart .result:has(p) .e {
+.App .Container main#Game .pickXO ul, .App .Stage2 main#Game > div:has(button) .gameItem,
+.App .Stage3 main#Game > div:has(button) .gameItem, .App .Container .main-header, .App, #result-and-restart, #result-and-restart .result:has(p) .e {
   justify-content: center;
 }
 
@@ -57,8 +57,8 @@
   justify-content: space-evenly;
 }
 
-.App .Container main#Game .pickXO ul, .App .Stage2 main#Game > div:has(button) button,
-.App .Stage3 main#Game > div:has(button) button, .App .Container .main-header, .App .Stage2 .main-header,
+.App .Container main#Game .pickXO ul, .App .Stage2 main#Game > div:has(button) .gameItem,
+.App .Stage3 main#Game > div:has(button) .gameItem, .App .Container .main-header, .App .Stage2 .main-header,
 .App .Stage3 .main-header, .App .Stage2 .main-header .header__turn,
 .App .Stage3 .main-header .header__turn, .App, #result-and-restart, #result-and-restart .result:has(p) .e {
   align-items: center;
@@ -518,44 +518,43 @@ svg {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
-.App .Stage2 main#Game > div:has(button) button,
-.App .Stage3 main#Game > div:has(button) button {
+.App .Stage2 main#Game > div:has(button) .gameItem,
+.App .Stage3 main#Game > div:has(button) .gameItem {
   --focus-shadow: inset 0px -0.4rem 0 var(--accent-shadow-clr);
-  width: 100%;
-  height: 100%;
   padding: 1rem;
   border-radius: var(--border-radius);
   background-color: var(--accent-clr);
 }
-.App .Stage2 main#Game > div:has(button) button .c,
-.App .Stage3 main#Game > div:has(button) button .c {
+.App .Stage2 main#Game > div:has(button) .gameItem .c,
+.App .Stage3 main#Game > div:has(button) .gameItem .c {
   width: 75%;
   height: 75%;
   position: relative;
 }
-.App .Stage2 main#Game > div:has(button) button .c svg,
-.App .Stage3 main#Game > div:has(button) button .c svg {
+.App .Stage2 main#Game > div:has(button) .gameItem .c svg,
+.App .Stage3 main#Game > div:has(button) .gameItem .c svg {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
 }
-.App .Stage2 main#Game > div:has(button) button[data-played=false] .c svg,
-.App .Stage3 main#Game > div:has(button) button[data-played=false] .c svg {
+.App .Stage2 main#Game > div:has(button) .gameItem[data-played=false] .c svg,
+.App .Stage3 main#Game > div:has(button) .gameItem[data-played=false] .c svg {
   opacity: 0;
   transition: opacity 100ms cubic-bezier(0.66, -0.2, 0.27, 1.15);
 }
-.App .Stage2 main#Game > div:has(button) button[data-played=false]:where(:hover, :active) .c svg,
-.App .Stage3 main#Game > div:has(button) button[data-played=false]:where(:hover, :active) .c svg {
+.App .Stage2 main#Game > div:has(button) .gameItem[data-played=false]:where(:hover, :active) .c svg,
+.App .Stage3 main#Game > div:has(button) .gameItem[data-played=false]:where(:hover, :active) .c svg {
   opacity: 1;
 }
-.App .Stage2 main#Game > div:has(button) button[data-played=true]:has(svg, img),
-.App .Stage3 main#Game > div:has(button) button[data-played=true]:has(svg, img) {
+.App .Stage2 main#Game > div:has(button) .gameItem[data-played=true]:has(svg, img),
+.App .Stage3 main#Game > div:has(button) .gameItem[data-played=true]:has(svg, img) {
   pointer-events: none;
 }
 
-.App .Stage2 footer {
+.App .Stage2 footer,
+.App .Stage3 footer {
   width: 100%;
   display: grid;
   grid-template-rows: repeat(1, 1fr);
@@ -563,7 +562,8 @@ svg {
   gap: 1rem;
   gap: 1rem;
 }
-.App .Stage2 footer > div {
+.App .Stage2 footer > div,
+.App .Stage3 footer > div {
   background-color: var(--accent-clr);
   border-radius: var(--border-radius);
   text-align: center;
@@ -572,7 +572,9 @@ svg {
   white-space: nowrap;
 }
 .App .Stage2 footer > div h3,
-.App .Stage2 footer > div p {
+.App .Stage2 footer > div p,
+.App .Stage3 footer > div h3,
+.App .Stage3 footer > div p {
   color: var(--accent-text-clr);
   margin: 0;
 }
@@ -581,7 +583,8 @@ svg {
   .App .Container {
     --container-width: 35%;
   }
-  .App .Container.Stage2 {
+  .App .Container.Stage2,
+  .App .Container.Stage3 {
     --container-width: 38%;
   }
 }
@@ -589,7 +592,8 @@ svg {
   .App .Container {
     --container-width: 90%;
   }
-  .App .Container.Stage2 {
+  .App .Container.Stage2,
+  .App .Container.Stage3 {
     --container-width: 90%;
   }
 }
@@ -606,8 +610,9 @@ svg {
   }
 }
 @supports (aspect-ratio: 1/1) {
-  .Stage2 main#Game > div:has(button) {
-    height: unset !important;
+  .Stage2 main#Game > div:has(button) button,
+  .Stage3 main#Game > div:has(button) button {
+    width: 100%;
     aspect-ratio: 1/1;
   }
 }

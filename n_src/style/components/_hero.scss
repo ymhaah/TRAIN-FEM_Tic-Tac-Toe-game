@@ -64,11 +64,8 @@
             margin: 1.5rem 0;
             @include grid(3, 3, fr, 1rem);
             > div:has(button) {
-                button {
-                    // ! make the hight = width with js
+                .gameItem {
                     --focus-shadow: inset 0px -0.4rem 0 var(--accent-shadow-clr);
-                    width: 100%;
-                    height: 100%;
                     padding: 1rem;
                     border-radius: var(--border-radius);
                     background-color: var(--accent-clr);
@@ -86,7 +83,7 @@
                         }
                     }
                 }
-                button[data-played="false"] {
+                .gameItem[data-played="false"] {
                     .c {
                         svg {
                             opacity: 0;
@@ -95,14 +92,14 @@
                         }
                     }
                 }
-                button[data-played="false"]:where(:hover, :active) {
+                .gameItem[data-played="false"]:where(:hover, :active) {
                     .c {
                         svg {
                             opacity: 1;
                         }
                     }
                 }
-                button[data-played="true"]:has(svg, img) {
+                .gameItem[data-played="true"]:has(svg, img) {
                     pointer-events: none;
                 }
             }

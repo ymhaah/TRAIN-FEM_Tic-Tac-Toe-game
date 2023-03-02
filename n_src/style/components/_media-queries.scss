@@ -26,7 +26,8 @@
         .Container {
             --container-width: 35%;
         }
-        .Container.Stage2 {
+        .Container.Stage2,
+        .Container.Stage3 {
             --container-width: 38%;
         }
         // .Container.Stage3 {
@@ -43,7 +44,8 @@
         .Container {
             --container-width: 90%;
         }
-        .Container.Stage2 {
+        .Container.Stage2,
+        .Container.Stage3 {
             --container-width: 90%;
         }
         // .Container.Stage3 {
@@ -180,11 +182,14 @@
     }
 }
 @supports (aspect-ratio: 1 / 1) {
-    .Stage2 {
+    .Stage2,
+    .Stage3 {
         main#Game {
             > div:has(button) {
-                height: unset !important;
-                aspect-ratio: 1 / 1;
+                button {
+                    width: 100%;
+                    aspect-ratio: 1 / 1;
+                }
             }
         }
     }
