@@ -43,7 +43,7 @@ let toStage3 = 700;
 
 function App() {
     const [pageStates, setPageStates] = useState({
-        pageState: 1,
+        pageState: 2,
         gameResult: {
             restart: false,
             draw: false,
@@ -56,16 +56,97 @@ function App() {
         },
         players: {
             cpu: {
-                playingWith: false,
-                cpuPlayer: null,
+                playingWith: true,
+                cpuPlayer: false,
             },
-            p1: false,
+            p1: true,
             currentPlayer: false,
         },
     });
 
-    console.log(pageStates);
+    // console.log(pageStates);
     const [gameItems, setGameItem] = useState(itemInfoFun(dimensions));
+
+    /*
+        {
+        "ItemInfo": {
+            "id": "fe5fbe4f-6bde-4dc6-ab10-28e9791cb24f",
+            "played": false,
+            "player": null,
+            "location": {
+                "index": 0,
+                "x": 1,
+                "y": 1
+            },
+            "wining": false
+        }
+    },
+    */
+
+    //! stage 1 functions
+
+    function updatePageState(pageState) {
+        setPageStates((prevPageStates) => {
+            return {
+                ...prevPageStates,
+                pageState: pageState,
+            };
+        });
+    }
+    function playWithCpu() {
+        setPageStates((prevPageStates) => {
+            return {
+                ...prevPageStates,
+                players: {
+                    cpu: {
+                        playingWith: true,
+                        cpuPlayer: !prevPageStates.players.p1,
+                    },
+                    p1: prevPageStates.players.p1,
+                    currentPlayer: prevPageStates.players.currentPlayer,
+                },
+            };
+        });
+    }
+    function switchPlayer(player) {
+        setPageStates((prevPageStates) => {
+            return {
+                ...prevPageStates,
+                players: {
+                    cpu: {
+                        playingWith: prevPageStates.players.cpu.playingWith,
+                        cpuPlayer: prevPageStates.players.cpu.cpuPlayer,
+                    },
+                    p1: player,
+                    currentPlayer: prevPageStates.players.currentPlayer,
+                },
+            };
+        });
+    }
+
+    //! stage 2 functions
+
+    function playingSystem(i) {
+        setGameItem((prevGameItems) => {
+            prevGameItems[i].ItemInfo.played = true;
+            prevGameItems[i].ItemInfo.player = pageStates.players.currentPlayer;
+            winingSystem();
+            return [...prevGameItems];
+        });
+        setPageStates((prevPageStates) => {
+            return {
+                ...prevPageStates,
+                players: {
+                    cpu: {
+                        playingWith: prevPageStates.players.cpu.playingWith,
+                        cpuPlayer: prevPageStates.players.cpu.cpuPlayer,
+                    },
+                    p1: prevPageStates.players.p1,
+                    currentPlayer: !prevPageStates.players.currentPlayer,
+                },
+            };
+        });
+    }
 
     function draw() {
         setPageStates((prevPageStates) => {
@@ -88,7 +169,7 @@ function App() {
         }, toStage3);
     }
 
-    function oWins() {
+    function oWins(winners) {
         setPageStates((prevPageStates) => {
             return {
                 ...prevPageStates,
@@ -104,13 +185,20 @@ function App() {
                 },
             };
         });
+        winners.forEach((i) => {
+            setGameItem((prevGameItems) => {
+                prevGameItems[i.ItemInfo.location.index].ItemInfo.wining = true;
+                return [...prevGameItems];
+            });
+        });
         setTimeout(() => {
             updatePageState(3);
         }, toStage3);
     }
 
-    function xWins() {
+    function xWins(winners) {
         setPageStates((prevPageStates) => {
+            console.log("x");
             return {
                 ...prevPageStates,
                 gameResult: {
@@ -124,6 +212,12 @@ function App() {
                     },
                 },
             };
+        });
+        winners.forEach((i) => {
+            setGameItem((prevGameItems) => {
+                prevGameItems[i.ItemInfo.location.index].ItemInfo.wining = true;
+                return [...prevGameItems];
+            });
         });
         setTimeout(() => {
             updatePageState(3);
@@ -157,15 +251,7 @@ function App() {
                             )
                         ) {
                             // if x wins
-                            diagonals[0].forEach((i) => {
-                                setGameItem((prevGameItems) => {
-                                    prevGameItems[
-                                        i.ItemInfo.location.index
-                                    ].ItemInfo.wining = true;
-                                    return [...prevGameItems];
-                                });
-                            });
-                            xWins();
+                            xWins(diagonals[0]);
                         }
                         if (
                             diagonals[0].every(
@@ -173,15 +259,7 @@ function App() {
                             )
                         ) {
                             // if o wins
-                            diagonals[0].forEach((i) => {
-                                setGameItem((prevGameItems) => {
-                                    prevGameItems[
-                                        i.ItemInfo.location.index
-                                    ].ItemInfo.wining = true;
-                                    return [...prevGameItems];
-                                });
-                            });
-                            oWins();
+                            oWins(diagonals[0]);
                         }
                     }
                 }
@@ -200,15 +278,7 @@ function App() {
                             )
                         ) {
                             // if x wins
-                            diagonals[1].forEach((i) => {
-                                setGameItem((prevGameItems) => {
-                                    prevGameItems[
-                                        i.ItemInfo.location.index
-                                    ].ItemInfo.wining = true;
-                                    return [...prevGameItems];
-                                });
-                            });
-                            xWins();
+                            xWins(diagonals[1]);
                         }
                         if (
                             diagonals[1].every(
@@ -216,15 +286,7 @@ function App() {
                             )
                         ) {
                             // if o wins
-                            diagonals[1].forEach((i) => {
-                                setGameItem((prevGameItems) => {
-                                    prevGameItems[
-                                        i.ItemInfo.location.index
-                                    ].ItemInfo.wining = true;
-                                    return [...prevGameItems];
-                                });
-                            });
-                            oWins();
+                            oWins(diagonals[1]);
                         }
                     }
                 }
@@ -242,30 +304,14 @@ function App() {
                     // if X wins in a column
                     winnerColX.push(gameItems[item]);
                     if (winnerColX.length == Dim) {
-                        winnerColX.forEach((i) => {
-                            setGameItem((prevGameItems) => {
-                                prevGameItems[
-                                    i.ItemInfo.location.index
-                                ].ItemInfo.wining = true;
-                                return [...prevGameItems];
-                            });
-                        });
-                        xWins();
+                        xWins(winnerColX);
                     }
                 }
                 if (gameItems[item].ItemInfo.player == true) {
                     // if O wins in a column
                     winnerColO.push(gameItems[item]);
                     if (winnerColO.length == Dim) {
-                        winnerColO.forEach((i) => {
-                            setGameItem((prevGameItems) => {
-                                prevGameItems[
-                                    i.ItemInfo.location.index
-                                ].ItemInfo.wining = true;
-                                return [...prevGameItems];
-                            });
-                        });
-                        oWins();
+                        oWins(winnerColO);
                     }
                 }
             }
@@ -282,30 +328,14 @@ function App() {
                     // if X wins in a row
                     winnerRowX.push(gameItems[start]);
                     if (winnerRowX.length == Dim) {
-                        winnerRowX.forEach((i) => {
-                            setGameItem((prevGameItems) => {
-                                prevGameItems[
-                                    i.ItemInfo.location.index
-                                ].ItemInfo.wining = true;
-                                return [...prevGameItems];
-                            });
-                        });
-                        xWins();
+                        xWins(winnerRowX);
                     }
                 }
                 if (gameItems[start].ItemInfo.player == true) {
                     // if O wins in a row
                     winnerRowO.push(gameItems[start]);
                     if (winnerRowO.length == Dim) {
-                        winnerRowO.forEach((i) => {
-                            setGameItem((prevGameItems) => {
-                                prevGameItems[
-                                    i.ItemInfo.location.index
-                                ].ItemInfo.wining = true;
-                                return [...prevGameItems];
-                            });
-                        });
-                        oWins();
+                        oWins(winnerRowO);
                     }
                 }
             }
@@ -322,62 +352,26 @@ function App() {
         }
     }
 
-    // {
-    //     "ItemInfo": {
-    //         "id": "fe5fbe4f-6bde-4dc6-ab10-28e9791cb24f",
-    //         "played": false,
-    //         "player": null,
-    //         "location": {
-    //             "index": 0,
-    //             "x": 1,
-    //             "y": 1
-    //         },
-    //         "wining": false
-    //     }
-    // },
-
-    function CPU() {
-        // playingSystem(i)
-        // gameItems[].ItemInfo
-        if (
-            gameItems.every((item) => {
-                return !item.ItemInfo.played;
-            })
-        ) {
-            // if it is the first move
-            let rand = randomNum(0, 8);
-            changeCurrentPlayer();
-            playingSystem(rand);
-        } else {
-            // if it is not the first move
-        }
+    function isRestart() {
+        setPageStates((prevPageStates) => {
+            return {
+                ...prevPageStates,
+                pageState: 3,
+                gameResult: {
+                    restart: true,
+                    draw: false,
+                    winner: null,
+                    history: {
+                        xWins: prevPageStates.gameResult.history.xWins,
+                        oWins: prevPageStates.gameResult.history.oWins,
+                        draw: prevPageStates.gameResult.history.draw,
+                    },
+                },
+            };
+        });
     }
 
-    function playingWithCpu() {
-        if (pageStates.pageState >= 2 && pageStates.players.cpu.playingWith) {
-            if (pageStates.players.cpu.cpuPlayer === true) {
-                // cpu playing with O
-
-                if (
-                    pageStates.players.currentPlayer ===
-                    pageStates.players.cpu.cpuPlayer
-                ) {
-                    CPU();
-                }
-            } else if (pageStates.players.cpu.cpuPlayer === false) {
-                // cpu playing with X
-
-                if (
-                    pageStates.players.currentPlayer ===
-                    pageStates.players.cpu.cpuPlayer
-                ) {
-                    CPU();
-                }
-            }
-        }
-    }
-
-    playingWithCpu();
+    // ! stage 3 functions
 
     function nextRound() {
         setGameItem(itemInfoFun(dimensions));
@@ -387,7 +381,7 @@ function App() {
                 players: {
                     cpu: {
                         playingWith: prevPageStates.players.cpu.playingWith,
-                        cpuPlayer: prevPageStates.players.cpuPlayer,
+                        cpuPlayer: prevPageStates.players.cpu.cpuPlayer,
                     },
                     p1: prevPageStates.players.p1,
                     currentPlayer: false,
@@ -415,91 +409,6 @@ function App() {
         });
     }
 
-    function playingSystem(i) {
-        setGameItem((prevGameItems) => {
-            prevGameItems[i].ItemInfo.played = true;
-            prevGameItems[i].ItemInfo.player = pageStates.players.currentPlayer;
-            winingSystem();
-            return [...prevGameItems];
-        });
-    }
-
-    function updatePageState(pageState) {
-        setPageStates((prevPageStates) => {
-            return {
-                ...prevPageStates,
-                pageState: pageState,
-            };
-        });
-    }
-
-    function playWithCpu() {
-        setPageStates((prevPageStates) => {
-            return {
-                ...prevPageStates,
-                players: {
-                    cpu: {
-                        playingWith: true,
-                        cpuPlayer: !prevPageStates.players.p1,
-                    },
-                    p1: prevPageStates.players.p1,
-                    currentPlayer: prevPageStates.players.currentPlayer,
-                },
-            };
-        });
-    }
-
-    function isRestart() {
-        setPageStates((prevPageStates) => {
-            return {
-                ...prevPageStates,
-                pageState: 3,
-                gameResult: {
-                    restart: true,
-                    draw: false,
-                    winner: null,
-                    history: {
-                        xWins: prevPageStates.gameResult.history.xWins,
-                        oWins: prevPageStates.gameResult.history.oWins,
-                        draw: prevPageStates.gameResult.history.draw,
-                    },
-                },
-            };
-        });
-    }
-
-    function changeCurrentPlayer() {
-        setPageStates((prevPageStates) => {
-            return {
-                ...prevPageStates,
-                players: {
-                    cpu: {
-                        playingWith: prevPageStates.players.cpu.playingWith,
-                        cpuPlayer: prevPageStates.players.cpu.cpuPlayer,
-                    },
-                    p1: prevPageStates.players.p1,
-                    currentPlayer: !prevPageStates.players.currentPlayer,
-                },
-            };
-        });
-    }
-
-    function switchPlayer(player) {
-        setPageStates((prevPageStates) => {
-            return {
-                ...prevPageStates,
-                players: {
-                    cpu: {
-                        playingWith: prevPageStates.players.cpu.playingWith,
-                        cpuPlayer: prevPageStates.players.cpu.cpuPlayer,
-                    },
-                    p1: player,
-                    currentPlayer: prevPageStates.players.currentPlayer,
-                },
-            };
-        });
-    }
-
     return (
         <div className="App">
             <a
@@ -515,6 +424,7 @@ function App() {
                     // ####################################
                     currentPlayer={pageStates.players.currentPlayer}
                     isRestart={isRestart}
+                    playingSystem={playingSystem}
                 />
                 {pageStates.pageState == 1 && (
                     <>
@@ -534,8 +444,7 @@ function App() {
                             gameItems={gameItems}
                             playingSystem={playingSystem}
                             players={pageStates.players}
-                            changeCurrentPlayer={changeCurrentPlayer}
-                            CPU={CPU}
+                            winingSystem={winingSystem}
                         />
                         <Score
                             history={pageStates.gameResult.history}

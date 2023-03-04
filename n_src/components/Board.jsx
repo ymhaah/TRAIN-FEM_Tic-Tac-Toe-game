@@ -1,10 +1,12 @@
 import React from "react";
 import accentFun from "../utils/accentFun.js";
+import randomNum from "../utils/randomNum.js";
 import XIcon from "./uiComponents/XIcon.jsx";
 import OIcon from "./uiComponents/OIcon.jsx";
 
 function Board(prop) {
     const [pgWidth, setPgWidth] = React.useState();
+    const [cpuTurn, setCpuTurn] = React.useState(null);
 
     React.useEffect(() => {
         if (!CSS.supports("aspect-ratio: 1 / 1")) {
@@ -18,6 +20,62 @@ function Board(prop) {
             };
         }
     }, [window.innerWidth]);
+
+    React.useEffect(() => {
+        function CPU() {
+            // playingSystem(i)
+            // gameItems[].ItemInfo
+            if (
+                prop.gameItems.every((item) => {
+                    return !item.ItemInfo.played;
+                })
+            ) {
+                // if it is the first move
+                let rand = randomNum(0, 8);
+                prop.playingSystem(rand);
+                return;
+            } else if (
+                prop.gameItems.some((item) => {
+                    return !item.ItemInfo.played;
+                }) &&
+                cpuTurn
+            ) {
+                return;
+            }
+        }
+        function playingWithCpu() {
+            // if (prop.players.cpu.playingWith) {
+            //     if (prop.players.cpu.cpuPlayer === true) {
+            //         // cpu playing with O
+
+            //         if (
+            //             prop.players.currentPlayer ===
+            //             prop.players.cpu.cpuPlayer
+            //         ) {
+            //             CPU();
+            //             setCpuTurn(false);
+            //         }
+            //     } else if (prop.players.cpu.cpuPlayer === false) {
+            //         // cpu playing with X
+
+            //         if (
+            //             prop.players.currentPlayer ===
+            //             prop.players.cpu.cpuPlayer
+            //         ) {
+            //             CPU();
+            //             setCpuTurn(false);
+            //         }
+            //     }
+            // }
+            if (prop.players.cpu.playingWith) {
+                if (prop.players.currentPlayer === prop.players.cpu.cpuPlayer) {
+                    CPU();
+                    setCpuTurn(false);
+                }
+            }
+        }
+        playingWithCpu();
+    }, [cpuTurn, prop.players]);
 
     return (
         <main id="Game" className="accent-M-clr">
@@ -42,7 +100,7 @@ function Board(prop) {
                             data-played={item.ItemInfo.played}
                             onClick={() => {
                                 prop.playingSystem(i);
-                                prop.changeCurrentPlayer();
+                                setCpuTurn(true);
                             }}
                         >
                             <div className="c">

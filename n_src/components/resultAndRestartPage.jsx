@@ -42,8 +42,8 @@ function Result(prop) {
                         accent="o"
                         pageState={3}
                         handelClick={() => {
-                            prop.updatePageState(2);
                             prop.nextRound();
+                            prop.updatePageState(2);
                         }}
                     />
                 </div>
@@ -74,8 +74,8 @@ function Result(prop) {
                         accent="o"
                         pageState={3}
                         handelClick={() => {
-                            prop.updatePageState(2);
                             prop.nextRound();
+                            prop.updatePageState(2);
                         }}
                     />
                 </div>
@@ -105,8 +105,8 @@ function Result(prop) {
                         accent="o"
                         pageState={3}
                         handelClick={() => {
-                            prop.updatePageState(2);
                             prop.nextRound();
+                            prop.updatePageState(2);
                         }}
                     />
                 </div>
