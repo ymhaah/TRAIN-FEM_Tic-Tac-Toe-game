@@ -6,9 +6,8 @@
 // @include grid(2, 2, fr, 1rem)
 
 .App {
-    .Container {
-    }
-    .Stage2 {
+    .Stage2,
+    .Stage3 {
         footer {
             width: 100%;
             @include grid(1, 3, fr, 1rem);

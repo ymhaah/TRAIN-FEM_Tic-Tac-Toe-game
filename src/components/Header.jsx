@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "./uiComponents/Button";
 import XIcon from "./uiComponents/XIcon.jsx";
 import OIcon from "./uiComponents/OIcon.jsx";
@@ -30,10 +29,10 @@ function Header(prop) {
                     <span className="visually-hidden"> my logo </span>
                 </a>
             </div>
-            {prop.pageState == 2 && (
+            {prop.pageState >= 2 && (
                 <>
                     <div className="header__turn">
-                        {prop.playWite == false ? (
+                        {prop.currentPlayer === false ? (
                             <>
                                 <XIcon hover={false} accent="s" />
                                 <h2 className="p fw-b">

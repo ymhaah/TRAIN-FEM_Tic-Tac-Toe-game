@@ -41,7 +41,6 @@ body {
 }
 .Container {
     --container-width: 50%;
-    min-height: 50%;
     max-height: 100%;
     width: var(--container-width, 90%);
     margin: auto;
@@ -50,12 +49,6 @@ body {
     .Container {
         --container-width: 30%;
     }
-    // .Container.Stage2 {
-    //     --container-width: 30%;
-    // }
-    // .Container.Stage3 {
-    //     --container-width: 30%;
-    // }
 }
 li,
 ul {
@@ -86,7 +79,6 @@ ul {
 }
 img,
 svg {
-    // max-width: 100%;
     user-select: none;
     display: block;
 }
@@ -166,5 +158,45 @@ svg {
     z-index: 1000;
     top: 0;
     right: 0;
-    background-color: red;
+    background-color: hsla(var(--clr-alpha-dark-teal-800) / 0.7);
+    @include flex(r, c, c);
+    .result {
+        width: 100%;
+        background-color: var(--bg-item-clr);
+        padding: 5rem 5%;
+        text-align: center;
+        h3 {
+            font-size: var(--fs-xl);
+            margin: 0 0 1.5rem 0;
+        }
+        .Button {
+            width: auto;
+            padding: max(1em, 1rem) max(1em, 1rem);
+        }
+        .Button:not(:last-child) {
+            margin: 0 1rem 0 0;
+        }
+    }
+    .result:has(p) {
+        h3 {
+            font-size: var(--fs-s);
+            margin: 0 0 1rem 0;
+        }
+        .e {
+            @include flex(r, c, c);
+            margin: 0 0 1rem 0;
+            span {
+                display: block;
+                margin: 0 1rem 0 0;
+                svg {
+                    width: calc(var(--fs-xl) * 1.25);
+                    height: calc(var(--fs-xl) * 1.25);
+                }
+            }
+            p {
+                color: var(--accent-clr);
+                font-size: var(--fs-xl);
+            }
+        }
+    }
 }

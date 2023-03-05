@@ -1,5 +1,3 @@
-import React from "react";
-
 function Score(prop) {
     return (
         <footer>
@@ -12,7 +10,7 @@ function Score(prop) {
                         : prop.players.cpu.playingWith &&
                           prop.players.cpu.cpuPlayer === true
                         ? "you"
-                        : !prop.players.cpu.playingWith && "player1"}
+                        : !prop.players.cpu.playingWith && "p1"}
                     )
                 </h3>
                 <p className="fw-b fs-400">{prop.history.xWins}</p>
@@ -30,7 +28,7 @@ function Score(prop) {
                         : prop.players.cpu.playingWith &&
                           prop.players.cpu.cpuPlayer === false
                         ? "you"
-                        : !prop.players.cpu.playingWith && "player2"}
+                        : !prop.players.cpu.playingWith && "p2"}
                     )
                 </h3>
                 <p className="fw-b fs-400">{prop.history.oWins}</p>

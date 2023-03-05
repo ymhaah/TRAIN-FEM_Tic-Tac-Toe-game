@@ -31,18 +31,18 @@ function Button(prop) {
     } else if (prop.pageState == 3) {
         if (prop.restart) {
             content =
-                prop.accent == "x"
-                    ? ""
-                    : prop.accent == "o"
+                prop.accent == "o"
                     ? "yes, restart"
-                    : prop.accent == "s" && "no, cancel";
+                    : prop.accent == "s"
+                    ? "no, cancel"
+                    : "";
         } else {
             content =
-                prop.accent == "x"
-                    ? ""
-                    : prop.accent == "o"
+                prop.accent == "o"
                     ? "next round"
-                    : prop.accent == "s" && "quit";
+                    : prop.accent == "s"
+                    ? "quit"
+                    : "";
         }
     }
 
@@ -51,7 +51,10 @@ function Button(prop) {
             type="button"
             className={`Button focus ${accentFun(prop.accent)}`}
             onClick={prop.handelClick}
-            aria-controls={prop.pageState == 2 && "result-and-restart"}
+            aria-controls={
+                prop.pageState == 2 ||
+                (prop.pageState == 3 && "result-and-restart")
+            }
         >
             {content}
         </button>
