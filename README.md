@@ -1,6 +1,7 @@
 # Frontend Mentor - Tic Tac Toe solution
+> Started at: Jan 11, 2023
 
-This is a solution to the [Tic Tac Toe challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/tic-tac-toe-game-Re7ZF_E2v).
+This is a solution to the [Tic Tac Toe challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/tic-tac-toe-game-Re7ZF_E2v). FrontendMentor is a platform where developers can improve their front-end skills by building real projects and receiving feedback from the community.
 
 ## Table of contents
 
@@ -40,7 +41,7 @@ Users should be able to:
 
 ### Links
 
--   Live Site URL: [Tic-Tac-Toe-game](https://ymhaah.github.io/Tic-Tac-Toe-game/)
+-   Live Site URL: [Tic-Tac-Toe-game](https://ymhaah.github.io/TRAIN-FEM_Tic-Tac-Toe-game/)
 
 ## My process
 
